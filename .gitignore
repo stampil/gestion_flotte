@@ -1,0 +1,7 @@
+app.min.*
+.project
+.idea/
+.settings/
+nbproject
+upload/
+config/

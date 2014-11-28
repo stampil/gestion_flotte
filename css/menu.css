@@ -1,0 +1,17 @@
+#menu{
+    margin: 0 0 10px 0;
+    background:#E7E7E7;
+    
+}
+
+#menu div{
+    display:inline-block;
+    padding: 5px 10px;
+    cursor:pointer;
+    background: #d6d1d1;
+    border: 1px solid transparent;
+}
+
+#menu .actif{
+    border: 1px solid black;
+}
