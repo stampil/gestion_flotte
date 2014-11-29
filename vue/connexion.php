@@ -18,12 +18,13 @@ if(@$_POST["email"]){
     }
 }
 include_once 'template/menu.php';
-$team_user = $USER->get_team();
+
 ?>
 
 
 <?php
 if(is_connected()){
+    $team_user = $USER->get_team();
 ?>
 <center>
     <form method="POST" action="?action=connexion">
