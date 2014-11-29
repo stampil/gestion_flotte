@@ -1,5 +1,6 @@
 <?php
 include_once 'template/menu.php';
+if(!is_connected()) exit("veuillez vous (re)connectez");
 $joueurM = new JoueurManager($bdd);
 $last_joueur = $joueurM->get_all_joueur(50);
 $orientationM = new OrientationManager($bdd);
