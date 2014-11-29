@@ -18,7 +18,7 @@ if(@$_POST["email"]){
     }
 }
 include_once 'template/menu.php';
-
+$team_user = $USER->get_team();
 ?>
 
 
@@ -33,7 +33,7 @@ if(is_connected()){
                 <td>Bienvenue <?php echo  $USER->get_handle() ?></td>  
             </tr>
             <tr>
-                <td><a href="https://robertsspaceindustries.com/citizens/<?php echo  $USER->get_handle() ?>" target="_blank"><img src="http://vps36292.ovh.net/mordu/t/306THSP/<?php echo  $USER->get_handle() ?>.png" /></a></td>  
+                <td><a href="https://robertsspaceindustries.com/citizens/<?php echo  $USER->get_handle() ?>" target="_blank"><img src="http://vps36292.ovh.net/mordu/t/<?php  echo $team_user[0]->tag ?>/<?php echo  $USER->get_handle() ?>.png" /></a></td>
             </tr>
             <tr>
                 <td colspan="2" align="center"><input type="submit" value="se deco"></td>      
