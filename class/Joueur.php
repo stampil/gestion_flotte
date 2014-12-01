@@ -34,7 +34,7 @@ class Joueur {
     
     public function get_team(){ 
         if(!$this->team){
-            $teamM = new TeamManager();
+            $teamM = new JoueurManager();
             $this->team = $teamM->get_team($this->id_joueur);
         }
         return $this->team;

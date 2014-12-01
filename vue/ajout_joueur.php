@@ -104,53 +104,6 @@ $team = $teamM->get_all_team();
     
     <?php
     
-    /*
-    <table class="table">
-        <tr>
-            <th>Handle</th>
-            <th>Team</th>
-            <th>Avatar</th>
-            <th>Orientation</th>
-            <th>Vaisseau</th>
-        </tr>
-        <?php
-        $tr ="";
-
-        for ($i = 0; $i < count($last_joueur); $i++) {
-            
-            $orientation_joueur = $joueurM->get_orientation($last_joueur[$i]->id_joueur);
-            $vaisseau_joueur = $joueurM->get_vaisseau($last_joueur[$i]->id_joueur);
-            $team_joueur = $joueurM->get_team($last_joueur[$i]->id_joueur);
-            $tr.= '<tr>'
-            . '<td valign="middle">' . $last_joueur[$i]->handle . '</td>'
-                    . '<td>';
-            
-            foreach($team_joueur as $o){
-                $tr.= '<img src="upload/team/'.$o->logo.'" class="logoMini help teamPrincipale'.$o->principal.'" title="'.$o->nom.' '.($o->principal?'(principal)':'').'" />';
-            }   
-            $tr.= '</td>'
-            . '<td><img class="logoMedium" src="upload/joueur/' . $last_joueur[$i]->img . '"></td>'
-            . '<td valign="middle" class="alignLeft">';
-            foreach($orientation_joueur as $o){
-                $tr.= '<img src="upload/orientation/'.$o->logo.'" class="logoMini help" title="'.$o->nom.'" />';
-            }
-            $tr.= '</td>'
-            . '<td valign="middle" class="alignLeft">';
-            
-            foreach($vaisseau_joueur as $o){
-                for($j=0; $j <$o->nb; $j++){
-                    $tr.= '<div class="container_vaisseauMedium reduce">';
-                    $tr.= '<img src="upload/vaisseau/'.$o->img.'" class="vaisseauMedium" title="'.$o->nb.'x ('.$o->constructeur.') '.$o->nom.'" />';
-                    $tr.= '</div>';
-                }
-            }
-            $tr.= '</td></tr>';
-            }
-        echo $tr;
-        ?>
-    </table>
-     * 
-     */
     for($i=0; $i<count($last_joueur);$i++){
         echo '<a href="https://robertsspaceindustries.com/citizens/'.$last_joueur[$i]->handle.'" target="_blank"><img src="http://vps36292.ovh.net/mordu/t/'.$last_joueur[$i]->tag.'/'.$last_joueur[$i]->handle.'.png" /></a>';
     }

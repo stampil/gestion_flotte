@@ -8,7 +8,7 @@ if(@$_POST["deco"]){
 
 if(@$_POST["email"]){
     $email = $_POST["email"];
-    $mdp = $crypt->encode($_POST["mdp"]);
+    $mdp = $crypt->crypte($_POST["mdp"]);
     
     $joueurM = new JoueurManager();
     $joueur = $joueurM->identifie_joueur($email, $mdp);
@@ -16,8 +16,12 @@ if(@$_POST["email"]){
         $USER=new Joueur($joueur[0]);
         $_SESSION["sjoueur"]= serialize($USER);     
     }
+    else{
+        echo "<p>mdp invalide</p>";
+    }
 }
 include_once 'template/menu.php';
+
 
 ?>
 

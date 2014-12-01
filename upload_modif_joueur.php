@@ -15,10 +15,10 @@ else{
 }
 if(!is_connected()) $uploadErr="Perte de connection...";
 
-$mdp = $crypt->encode($_POST["mdp"]);
+$mdp = $crypt->crypte($_POST["mdp"]);
 if($mdp != $USER->get_mdp())  $uploadErr="Mauvais mot de passe...";
 
-if($_POST["mdp2"]) $mdp = $crypt->encode($_POST["mdp2"]);
+if($_POST["mdp2"]) $mdp = $crypt->crypte($_POST["mdp2"]);
 
 
 $joueur = new Joueur((object) array(

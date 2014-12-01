@@ -6,6 +6,8 @@ $joueurM = new JoueurManager($bdd);
 $teamM = new TeamManager($bdd);
 
 $teams =$joueurM->get_team($USER->get_id());
+
+$joueur= $teamM->get_membre($teams[0]->id_team);
 ?>
 <center>
 <table class="table">
@@ -35,17 +37,66 @@ $teams =$joueurM->get_team($USER->get_id());
             
         echo '<td class="alignLeft">';
             foreach($flotte as $o){
+            $cargo+=$o->cargo*$o->nb;
+            echo '<div class="container_vaisseauMedium reduce">'
+            . '<img src="upload/vaisseau/'.$o->img.'" class="vaisseauMedium help"  />'
+            . '<div class="in_container_vaisseauMedium visible">'
+            . '<div title="'.$o->nb.'x '.$o->vaisseau.' ('.($o->cargo*$o->nb).' FU)">'.$o->nb.'</div>'
+            . '</div>'
+            . '</div>';
 
-                for($j=0; $j< $o->nb; $j++){
-                    $cargo+=$o->cargo;
-                    echo '<img src="upload/vaisseau/'.$o->img.'" class="vaisseauMedium help" title="'.$o->vaisseau.' (proprietaire :'.$o->joueur.')" />';
-                }
             }
         echo '</td>';
         
-         echo '<td>x / x / '.number_format($cargo, 0, ",", " ").' freight&nbsp;units</td>';
+         echo '<td>x / x / '.number_format($cargo, 0, ",", " ").' Freight&nbsp;Units</td>';
         echo '</tr>';
     }
     ?>
 </table>
+    
+    
+    <table class="table">
+        <tr>
+            <th>Handle</th>
+            <th>Team</th>
+            <th>Avatar</th>
+            <th>Orientation</th>
+            <th>Vaisseau</th>
+        </tr>
+        <?php
+        $tr ="";
+
+        for ($i = 0; $i < count($joueur); $i++) {
+            
+            $orientation_joueur = $joueurM->get_orientation($joueur[$i]->id_joueur);
+            $vaisseau_joueur = $joueurM->get_vaisseau($joueur[$i]->id_joueur);
+            $team_joueur = $joueurM->get_team($joueur[$i]->id_joueur);
+            $tr.= '<tr>'
+            . '<td valign="middle">' . $joueur[$i]->handle . '</td>'
+                    . '<td>';
+            
+            foreach($team_joueur as $o){
+                $tr.= '<img src="upload/team/'.$o->logo.'" class="logoMini help teamPrincipale'.$o->principal.'" title="'.$o->nom.' '.($o->principal?'(principal)':'').'" />';
+            }   
+            $tr.= '</td>'
+            . '<td><img class="logoMedium" src="upload/joueur/' . $joueur[$i]->img . '"></td>'
+            . '<td valign="middle" class="alignLeft">';
+            foreach($orientation_joueur as $o){
+                $tr.= '<img src="upload/orientation/'.$o->logo.'" class="logoMini help" title="'.$o->nom.'" />';
+            }
+            $tr.= '</td>'
+            . '<td valign="middle" class="alignLeft">';
+            
+            foreach($vaisseau_joueur as $o){
+                for($j=0; $j <$o->nb; $j++){
+                    $tr.= '<div class="container_vaisseauMedium reduce">';
+                    $tr.= '<img src="upload/vaisseau/'.$o->img.'" class="vaisseauMedium" title="'.$o->nb.'x ('.$o->constructeur.') '.$o->nom.'" />';
+                    $tr.= '</div>';
+                }
+            }
+            $tr.= '</td></tr>';
+            }
+        echo $tr;
+        ?>
+    </table>
 </center> 

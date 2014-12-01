@@ -40,15 +40,17 @@ $allianceM = new AllianceGroupeManager();
             
             echo '<td class="alignLeft">';
             foreach($flotte as $o){
-                
-                $team = $joueurM->get_team($o->id_joueur);
-                for($j=0;$j<$o->nb;$j++){
-                    $cargo+=$o->cargo;
-                echo '<img src="upload/vaisseau/'.$o->img.'"  class="vaisseauMedium help" title="'.$o->vaisseau.' (proprietaire :['.$team[0]->tag.'] '.$o->handle.' x'.$o->nb.')" />';
-                }
+
+                $cargo+=$o->cargo*$o->nb;
+                            echo '<div class="container_vaisseauMedium reduce">'
+            . '<img src="upload/vaisseau/'.$o->img.'" class="vaisseauMedium help"  />'
+            . '<div class="in_container_vaisseauMedium visible">'
+            . '<div title="'.$o->nb.'x '.$o->vaisseau.' ('.($o->sum_cargo).' FU)">'.$o->nb.'</div>'
+            . '</div>'
+            . '</div>';                
             }
             echo'</td>';
-            echo '<td>x / x / '.number_format($cargo, 0, ",", " ").' freight&nbsp;units</td>';
+            echo '<td>x / x / '.number_format($cargo, 0, ",", " ").' Freight&nbsp;Units</td>';
              echo '</tr>';
     }
     ?>

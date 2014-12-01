@@ -2,11 +2,6 @@
 
 class MyPDO extends PDO{
 
-    private $DB_HOST= 'localhost';
-    private $DB_PORT='3306';
-    private $DB_NAME='starcitizen';
-    private $DB_USER='root';
-    private $DB_PASS='';
     const DB_FLAG='rsi_';
 
 
@@ -16,15 +11,16 @@ class MyPDO extends PDO{
 	public static $nb_cache = 0;
 	
 	public function __construct($options=null){
-            @include_once 'config/bdd.php'; //info server prod pas dans git ;) doit definir les variable $DB_HOST=  avec les info prod
-
-            if(!isset($DB_HOST)) $DB_HOST = $this->DB_HOST;
-            if(!isset($DB_NAME)) $DB_NAME = $this->DB_NAME;
-            if(!isset($DB_PASS)) $DB_PASS = $this->DB_PASS;
-            if(!isset($DB_PORT)) $DB_PORT = $this->DB_PORT;
-            if(!isset($DB_USER)) $DB_USER = $this->DB_USER;
-
-		parent::__construct('mysql:host='.$DB_HOST.';port='.$DB_PORT.';dbname='.$DB_NAME,
+            
+            $DB_HOST= 'localhost';
+            $DB_PORT='3306';
+            $DB_NAME='starcitizen';
+            $DB_USER='root';
+            $DB_PASS='';
+            
+            $path = 'mysql:host='.$DB_HOST.';port='.$DB_PORT.';dbname='.$DB_NAME;
+           
+		parent::__construct($path,
                          $DB_USER, $DB_PASS, $options);
 		$this->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
 		$this->query("SET NAMES 'utf8'");

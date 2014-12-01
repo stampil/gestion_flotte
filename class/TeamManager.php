@@ -12,11 +12,19 @@ class TeamManager {
         }
     }
     
-    public function get_team($id){
+    public function get_membre($id_team){
+        $query="SELECT j.id_joueur, j.handle, j.img
+                FROM ".MyPDO::DB_FLAG."joueur_dans_team jdt
+                    JOIN ".MyPDO::DB_FLAG."joueur j ON jdt.id_joueur=j.id_joueur
+                WHERE jdt.id_team=? "; 
+        return $this->bdd->query($query,$id_team);
+    }
+    
+    public function get_team($id_team){
         $query="SELECT id_team, nom, tag, url, nbJoueur, logo 
                 FROM ".MyPDO::DB_FLAG."team
                 WHERE id_team=? "; 
-        return $this->bdd->query($query,$id);
+        return $this->bdd->query($query,$id_team);
     }
     
     public function get_all_team($limit = null){
@@ -54,7 +62,7 @@ class TeamManager {
         return $this->bdd->query($query,$id_team);
     }
     
-    public function get_flotte($id_team){
+    public function get_flotte_detailled($id_team){
         
             $query="SELECT j.handle, v.nom as vaisseau, v.img, v.cargo, jpv.nb, j.handle as joueur
             FROM ".MyPDO::DB_FLAG."joueur_dans_team jdt 
@@ -64,6 +72,18 @@ class TeamManager {
             WHERE jdt.id_team = ? 
             ORDER BY v.cargo desc, v.id_constructeur, v.nom asc
             ";
+        
+        return $this->bdd->query($query,$id_team);
+    }
+    
+    public function get_flotte($id_team){
+        $query="SELECT v.nom as vaisseau, v.img, SUM(v.cargo) as cargo, SUM(jpv.nb) as nb, SUM(jpv.nb)*SUM(v.cargo) as sum_cargo
+            FROM ".MyPDO::DB_FLAG."joueur_dans_team jdt 
+            JOIN ".MyPDO::DB_FLAG."joueur_possede_vaiss jpv ON jdt.id_joueur= jpv.id_joueur
+            JOIN ".MyPDO::DB_FLAG."vaisseau v ON jpv.id_vaisseau = v.id_vaisseau
+            WHERE jdt.id_team = ? 
+            GROUP BY 1
+            ORDER BY 5 desc, v.nom asc";
         
         return $this->bdd->query($query,$id_team);
     }

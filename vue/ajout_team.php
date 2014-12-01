@@ -54,43 +54,6 @@ $orientation = $orientationM->get_all_orientation();
     <div> Teams ajoutés :</div>
     
     <?php
-    /*
-<table class="table">
-    <tr>
-        <th>Nom</th>
-        <th>Logo</th>
-        <th>Orientation</th>
-        <th>Flotte</th>
-    </tr>
-    <?php
-    for($i=0; $i<count($last_team);$i++){
-        $orientation_team = $teamM->get_orientation($last_team[$i]->id_team);
-        $flotte = $teamM->get_flotte($last_team[$i]->id_team);
-        echo '<tr>'
-        . '<td valign="middle"><a href="'.$last_team[$i]->url.'" target="_blank">'.$last_team[$i]->nom.'</a></td>'
-        . '<td><img class="logoBig" src="upload/team/'.$last_team[$i]->logo.'"></td>';
-        echo '<td valign="middle" class="alignLeft">';
-            
-            foreach($orientation_team as $o){
-               echo '<img src="upload/orientation/'.$o->logo.'" class="logoMini help" title="'.$o->nom.'" />';
-            }
-            
-            echo '</td>';
-            
-        echo '<td class="alignLeft">';
-            foreach($flotte as $o){
-
-                for($j=0; $j< $o->nb; $j++){
-                    echo '<img src="upload/vaisseau/'.$o->img.'" class="vaisseauMedium help" title="'.$o->vaisseau.' (proprietaire :'.$o->joueur.')" />';
-                }
-            }
-        echo '</td>';
-        echo '</tr>';
-    }
-    ?>
-</table>
-     * 
-     */
     for($i=0; $i<count($last_team);$i++){
         echo '<a href="'.$last_team[$i]->url.'" target="_blank"><img class="logoBig" src="upload/team/'.$last_team[$i]->logo.'" title="'.$last_team[$i]->nom.'"></a> ';
     }

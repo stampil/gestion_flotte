@@ -14,6 +14,7 @@ class JoueurManager {
         $this->crypt= new Crypt();
     }
     
+    
     public function get_all_joueur($limit = null){
         $query="SELECT j.id_joueur, j.handle, j.img , t.tag
                 FROM ".MyPDO::DB_FLAG."joueur j
