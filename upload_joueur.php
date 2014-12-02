@@ -2,11 +2,26 @@
 require 'require/header.php';
 require 'require/commun.php';
 
+
 list($uploadErr,$img) = upload_img("img", "joueur");
 
-if(!Joueur::check_handle($_POST["handle"])){
-    $uploadErr.= "<p>Handle non reconnu </p>";
+if(isset($_POST["select_teamP_joueur"][0]) && $_POST["select_teamP_joueur"][0]){
+
+    $teamM = new TeamManager();
+    $team = $teamM->get_team($_POST["select_teamP_joueur"][0]);
+    $check_handle = API("orgs/getOrgMembers",'{"search": "'.$_POST["handle"].'","symbol": "'.$team[0]->tag.'"}');
+    if(isset($check_handle->data->totalrows) && $check_handle->data->totalrows != 1){
+        $uploadErr.= "<p>Handle ".$_POST["handle"]." non reconnu dans la team ".$team[0]->tag." </p>";
+    }
+    if( isset($check_handle->success) && !$check_handle->success && isset($check_handle->msg)){
+        $uploadErr.= $check_handle->msg;
+    }
 }
+else{
+     $uploadErr.= "<p>Vous devez faire partie d'une team pour utiliser cet outil.</p>";
+}
+
+
 
 $joueur = new Joueur((object) array(
             "id_joueur" => null,
@@ -35,6 +50,7 @@ if (!$uploadErr) {
     $_SESSION["sjoueur"]=  serialize($joueur);
     header("Location: index.php?action=modif_joueur");
 } else {
+    @unlink("upload/joueur/".$img);
     header("Location: index.php?action=accueil&mess=$uploadErr");
 }
 ?>

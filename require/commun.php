@@ -87,11 +87,10 @@ function API($path, $data){
                                     'content' => http_build_query(json_decode($data)),
                     ),
     );
-    $context = stream_context_create($options);
-
+    $context = @stream_context_create($options);
     $result = @file_get_contents($url, false, $context);
-    $result = str_replace("\\",'',$result);
-    return json_decode($result);
+    $result = json_decode($result);
+    return $result;
 }
 
 ?>
