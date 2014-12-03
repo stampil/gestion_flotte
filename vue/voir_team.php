@@ -88,11 +88,11 @@ $joueur= $teamM->get_membre($teams[0]->id_team);
             . '<td valign="middle" class="alignLeft">';
             
             foreach($vaisseau_joueur as $o){
-                for($j=0; $j <$o->nb; $j++){
+
                     $tr.= '<div class="container_vaisseauMedium reduce">';
-                    $tr.= '<img src="upload/vaisseau/'.$o->img.'" class="vaisseauMedium" title="'.$o->nb.'x ('.$o->constructeur.') '.$o->nom.'" />';
+                    $tr.= '<img src="upload/vaisseau/'.$o->img.'" class="vaisseauMedium" title="'.$o->type.' '.$o->nom.'" />';
                     $tr.= '</div>';
-                }
+
             }
             $tr.= '</td></tr>';
             }

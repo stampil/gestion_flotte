@@ -1,15 +1,26 @@
 <?php
 include_once 'template/menu.php';
 if(!is_connected()) exit("veuillez vous (re)connectez");
+
+
 $joueurM = new JoueurManager($bdd);
-$last_joueur = $joueurM->get_all_joueur(50);
 $orientationM = new OrientationManager($bdd);
+$vaisseauM = new VaisseauManager($bdd);
+$teamM = new TeamManager($bdd);
+
+if(@$_GET["supp_ship"]){
+    $joueurM->delete_vaisseau($USER->get_id(), $_GET["supp_ship"]);
+}
+
+
+
+$last_joueur = $joueurM->get_all_joueur(50);
 $orientation = $orientationM->get_all_orientation();
 $orientationU = $joueurM->get_orientation($USER->get_id());
-$vaisseauM = new VaisseauManager($bdd);
+
 $vaisseau = $vaisseauM->get_all_vaisseau();
 $vaisseauU = $joueurM->get_vaisseau($USER->get_id());
-$teamM = new TeamManager($bdd);
+
 $team = $teamM->get_all_team();
 $teamU = $joueurM->get_team($USER->get_id());
 
@@ -26,7 +37,7 @@ $teamU = $joueurM->get_team($USER->get_id());
                 <td><input type="email" name="email" required value="<?php echo $USER->get_email() ?>"></td>      
             </tr>
             <tr>
-                <td>reecrire mot&nbsp;de&nbsp;passe actuel pour valider les modifs :</td>
+                <td><span title="reecrire mdp  actuel pour valider les modifs :">Mot&nbsp;de&nbsp;passe</span></td>
                 <td><input type="password" name="mdp" required></td>      
             </tr>
             <tr>
@@ -35,7 +46,7 @@ $teamU = $joueurM->get_team($USER->get_id());
             </tr>
             <tr>
                 <td>Avatar :</td>
-                <td><img src="upload/joueur/<?php echo $USER->get_img() ?>" /></td>      
+                <td><img src="upload/joueur/<?php echo $USER->get_img() ?>"  class="logoMedium"/></td>      
             </tr>
             <tr>
                 <td>Nouvel avatar? :</td>
@@ -68,21 +79,46 @@ $teamU = $joueurM->get_team($USER->get_id());
 
                        
                         <table class="table">
-                        <?php
-                        for ($i = 0; $i < count($vaisseau); $i++) {
-                            $nb_vaiss=0;
+                            <tr>
+                                <th>Nom</th><th>Constructeur</th><th>Type</th><th>LTI</th><th><span class="help" title="Mettre la date réel si en réparation">Date dispo</span></th><th>Cargo</th><th>Autonomie</th><th>Cout réparation</th><th></th>
+                            </tr>
+                            <tr>
+                            <td><input type="text" value="<?php echo uniqid("ship_") ?>" name="nom[0]" /></td>
+                            <td colspan="2"><select name="ajout_vaisseau" class="select"><option value="0">Ajouter un vaisseau</option>
+                                <?php
+                                foreach($vaisseau as $o){
+                                    echo '<option value="'.$o->id_vaisseau.'">'.$o->nom.'</option>';
+                                }
+                                ?>
+                                
+                                </select></td>
+                            <td><input type="checkbox" title="cochez si LTI"  name="LTI[0]" /></td>
+                            <td colspan="5" class="alignRight"> <input type="submit" value="Ajouter un nouveau vaisseau" /></td>
+                            </tr>
+                            <?php
+
                             foreach($vaisseauU as $o){
-                               if($o->id_vaisseau == $vaisseau[$i]->id_vaisseau) {
-                                   $nb_vaiss = $o->nb;
-                               }
+                               echo '<tr><td>';
+                               echo '<input type="text" value="'.$o->nom.'" name="nom['.$o->id_jv.']" />';
+                               echo'</td><td>';
+                               echo '<img src="upload/constructeur/'.$o->constructeurLogo.'" title="'.$o->constructeur.'"/>';
+                               echo'</td><td>';
+                               echo '<img src="upload/vaisseau/'.$o->img.'" title="'.$o->type.'" class="vaisseauMedium"/>';
+                               echo '</td><td>';
+                               echo '<input type="checkbox" title="cochez si LTI" name="LTI['.$o->id_jv.']" '.($o->LTI?'checked="checked"':'').' />';
+                               echo '</td><td>';
+                               echo '<input type="date" name="date_dispo['.$o->id_jv.']" value="'.$o->date_dispo.'" />';
+                               echo '</td><td>';
+                               echo '<input type="number" name="cargo['.$o->id_jv.']" class="numberTiny" value="'.($o->modifCargo===null?$o->cargo:$o->modifCargo).'" />';
+                               echo '</td><td>';
+                               echo '<input type="number" name="autonomie['.$o->id_jv.']" class="numberTiny" value="'.($o->modifAutonomie===null?$o->autonomie:$o->modifAutonomie).'" />';
+                               echo '</td><td>';
+                               echo '<input type="number" name="coutReparation['.$o->id_jv.']" class="numberTiny" value="'.($o->modifCoutReparation===null?$o->coutReparation:$o->modifCoutReparation).'" />';
+                               echo '</td><td>';
+                               echo '<a name="supprimer" href="?action=modif_joueur&supp_ship='.$o->id_jv.'">Supprimer</a>';
+                               echo '</td></tr>';
                             }
-                            echo '<div class="container_vaisseauMedium">'
-                               . '<img src="upload/vaisseau/'.$vaisseau[$i]->img.'" class="vaisseauMedium" />'
-                               . '<div class="in_container_vaisseauMedium '.(!$nb_vaiss?'disabled':'').'" id_vaisseau="'.$vaisseau[$i]->id_vaisseau.'" title="'.$vaisseau[$i]->nom.'">'.$vaisseau[$i]->nom.'</div>'
-                               . '<div class="out_container_vaisseauMedium">Nb : <input type="number" min="0" value="'.$nb_vaiss.'" class="numberTiny numberVaisseau" id_vaisseau="'.$vaisseau[$i]->id_vaisseau.'" name="nb_vaiss['.$vaisseau[$i]->id_vaisseau.']"/></div>'
-                               . '<!-- a voir si LTI influe cout transport, si ajout enlever padding-top:9px a out_container_v <div class="out_container_vaisseauMedium"><span class="help" title="Cochez si au moins 1 vaisseau de ce type en assurance à vie.">LTI</span> : <input type="checkbox" name="LTI['.$vaisseau[$i]->id_vaisseau.']" /></div> -->'
-                            . '</div>';
-                        }
+                            
                         ?>
                         </table>
                         

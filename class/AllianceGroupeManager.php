@@ -58,8 +58,8 @@ class AllianceGroupeManager {
     }
     
     public function get_flotte($id_alliance){
-        $query="SELECT  jpv.id_vaisseau, SUM(jpv.nb) as nb, v.nom as vaisseau, SUM(v.cargo) as cargo, v.img, SUM(jpv.nb)*SUM(v.cargo) as sum_cargo
-            FROM ".MyPDO::DB_FLAG."joueur_possede_vaiss jpv
+        $query="SELECT  jpv.id_vaisseau, COUNT(jpv.id_vaisseau) as nb, v.nom as vaisseau, SUM(v.cargo) as cargo, v.img, count(jpv.id_vaisseau)*SUM(v.cargo) as sum_cargo
+            FROM ".MyPDO::DB_FLAG."joueur_possede_vaisseau jpv
             JOIN ".MyPDO::DB_FLAG."vaisseau v ON jpv.id_vaisseau = v.id_vaisseau     
             WHERE jpv.id_joueur IN (
                 SELECT DISTINCT id_joueur FROM `".MyPDO::DB_FLAG."joueur_dans_team` jdt 

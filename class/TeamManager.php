@@ -77,13 +77,13 @@ class TeamManager {
     }
     
     public function get_flotte($id_team){
-        $query="SELECT v.nom as vaisseau, v.img, SUM(v.cargo) as cargo, SUM(jpv.nb) as nb, SUM(jpv.nb)*SUM(v.cargo) as sum_cargo
+        $query="SELECT v.nom as vaisseau, v.img, SUM(v.cargo) as cargo, count(v.nom)*SUM(v.cargo) as sum_cargo, count(v.nom) as nb
             FROM ".MyPDO::DB_FLAG."joueur_dans_team jdt 
-            JOIN ".MyPDO::DB_FLAG."joueur_possede_vaiss jpv ON jdt.id_joueur= jpv.id_joueur
+            JOIN ".MyPDO::DB_FLAG."joueur_possede_vaisseau jpv ON jdt.id_joueur= jpv.id_joueur
             JOIN ".MyPDO::DB_FLAG."vaisseau v ON jpv.id_vaisseau = v.id_vaisseau
             WHERE jdt.id_team = ? 
             GROUP BY 1
-            ORDER BY 5 desc, v.nom asc";
+            ORDER BY 4 desc, v.nom asc";
         
         return $this->bdd->query($query,$id_team);
     }

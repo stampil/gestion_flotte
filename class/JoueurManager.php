@@ -133,31 +133,54 @@ class JoueurManager {
     }
     
     
-    public function set_vaisseau($id_joueur,$nb_vaisseau){
+    public function set_vaisseau_global($id_joueur, $nb_vaisseau){
         
-        $query = "DELETE FROM ".MyPDO::DB_FLAG."joueur_possede_vaiss
+        $query = "DELETE FROM ".MyPDO::DB_FLAG."joueur_possede_vaisseau
             WHERE id_joueur=?";
         $this->bdd->query($query,$id_joueur);
         
         if (!is_array($nb_vaisseau)) return false;
-        $query="INSERT INTO ".MyPDO::DB_FLAG."joueur_possede_vaiss (id_vaisseau, id_joueur, nb)
+        $query="INSERT INTO ".MyPDO::DB_FLAG."joueur_possede_vaisseau (id_vaisseau, id_joueur, nom)
                  VALUES(?,?,?)";
         foreach($nb_vaisseau as $id_vaisseau => $nb){
-            if($nb>0){
-                $this->bdd->query($query,$id_vaisseau,$id_joueur,$nb);
+            for ($i=0; $i<$nb; $i++){
+                $this->bdd->query($query,$id_vaisseau,$id_joueur,uniqid("ship_"));
             }
         }
     }
     
+    public function set_vaisseau($id_joueur, $vaisseau){
+        $query = "INSERT INTO ".MyPDO::DB_FLAG."joueur_possede_vaisseau (nom, LTI, id_joueur, id_vaisseau) VALUES(?,?,?,?)";
+        $this->bdd->query($query,$vaisseau->nom,$vaisseau->LTI, $id_joueur,$vaisseau->id_vaisseau);    
+    }
+    
+    public function update_vaisseau($id_joueur, $vaisseau){
+        $query = "UPDATE ".MyPDO::DB_FLAG."joueur_possede_vaisseau SET nom=?, LTI=?, WHERE id_joueur=1 AND id_vaisseau=?)";
+
+        $this->bdd->query($query,$vaisseau->nom,$vaisseau->LTI, $id_joueur,$vaisseau->id_vaisseau);    
+    }
+    
+
+    
     public function get_vaisseau($id_joueur){
-        $query = "SELECT v.id_vaisseau, v.nom, v.img, v.focus, v.cargo, v.autonomie, v.coutReparation, v.nbEquipage, v.id_constructeur, jpv.nb, jpv.date_dispo, c.nom as constructeur, c.logo as constructeurLogo 
+        $query = "SELECT v.id_vaisseau, v.nom as type, v.img, v.focus, v.cargo, v.autonomie,
+            v.coutReparation, v.nbEquipage, v.id_constructeur,
+            jpv.id_jv, jpv.nom, jpv.LTI, jpv.date_dispo, jpv.cargo as modifCargo,
+            jpv.autonomie as modifAutonomie, jpv.coutReparation as modifCoutReparation,
+            c.nom as constructeur, c.logo as constructeurLogo 
             FROM ".MyPDO::DB_FLAG."vaisseau v
-            JOIN ".MyPDO::DB_FLAG."joueur_possede_vaiss jpv
+            JOIN ".MyPDO::DB_FLAG."joueur_possede_vaisseau jpv
             ON v.id_vaisseau = jpv.id_vaisseau
             JOIN ".MyPDO::DB_FLAG."constructeur c
             ON v.id_constructeur= c.id_constructeur
             WHERE id_joueur=?";
         return $this->bdd->query($query,$id_joueur);
+    }
+    
+    public function delete_vaisseau($id_joueur,$id_jv){
+        
+        $query = "DELETE FROM ".MyPDO::DB_FLAG."joueur_possede_vaisseau WHERE id_joueur=? AND id_jv=?";
+        $this->bdd->query($query,$id_joueur,$id_jv);
     }
     
     public function get_groupe_alliance($id_joueur){

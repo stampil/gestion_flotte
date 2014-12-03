@@ -136,3 +136,6 @@ a:hover{
 .alignLeft{
     text-align:left !important;
 }
+.alignRight{
+    text-align:right !important;
+}

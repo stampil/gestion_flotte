@@ -44,10 +44,10 @@ if (!$uploadErr) {
     }
     $joueur->set_id($id_joueur);
     $joueurM->set_orientation($id_joueur, $_POST["select_orientation_joueur"]);
-    $joueurM->set_vaisseau($id_joueur, $_POST["nb_vaiss"]);
+    $joueurM->set_vaisseau_global($id_joueur, $_POST["nb_vaiss"]);
     $joueurM->set_team($id_joueur, $_POST["select_teamP_joueur"], $_POST["select_teamS_joueur"]);
 
-    $_SESSION["sjoueur"]=  serialize($joueur);
+    $_SESSION["sjoueur"] =  serialize($joueur);
     header("Location: index.php?action=modif_joueur");
 } else {
     @unlink("upload/joueur/".$img);

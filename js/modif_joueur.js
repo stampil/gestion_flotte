@@ -8,7 +8,12 @@ $(function() {
         }
     });
     
-    $('input[type="password"]').on("click",function(){
-        alert('Pour des raisons de sécurité,\nne mettez ni votre mot de passe forum, ni votre mot de passe du jeu.\nCe mot de passe ne sert que pour s\'identifier sur ce site');
+    $('a[name="supprimer"]').on("click", function(e){
+        var check = confirm('Etes vous sur de supprimer ce vaisseau de votre flotte?');
+        if(!check) {
+            e.preventDefault();
+            return false;
+        }
     });
+
   });
