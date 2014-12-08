@@ -90,7 +90,7 @@ $joueur= $teamM->get_membre($teams[0]->id_team);
             foreach($vaisseau_joueur as $o){
 
                     $tr.= '<div class="container_vaisseauMedium reduce">';
-                    $tr.= '<img src="upload/vaisseau/'.$o->img.'" class="vaisseauMedium" title="'.$o->type.' '.$o->nom.'" />';
+                    $tr.= '<img src="upload/vaisseau/'.$o->img.'" class="vaisseauMedium" title=\''.$o->type.' "'.$o->nom.'"\' />';
                     $tr.= '</div>';
 
             }

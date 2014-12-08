@@ -43,8 +43,26 @@ if (!$uploadErr) {
         $joueurM->set_vaisseau($USER->get_id(), (object) array("nom"=>$_POST["nom"][0],"LTI" =>$LTI, "id_vaisseau" => $_POST["ajout_vaisseau"] ));
     }
 
-    //$joueurM->set_vaisseau($USER->get_id(), $_POST["nb_vaiss"]);
+
+    foreach($_POST["date_dispo"] as $id => $value){
+        if(isset($_POST["LTI"][$id]) && $_POST["LTI"][$id]){
+        $LTI=1;
+    }
+    else{
+        $LTI=0;
+    }
+    $joueurM->update_vaisseau($USER->get_id(), (object) array(
+        "nom"=>$_POST["nom"][$id],
+        "LTI" =>$LTI,
+        "date_dispo"=>$_POST["date_dispo"][$id],
+        "cargo"=>$_POST["cargo"][$id],
+        "autonomie"=>$_POST["autonomie"][$id],
+        "coutReparation"=>$_POST["coutReparation"][$id],
+        "id_vaisseau" => $id
+    ));
+    }
     
+
     
     $joueurM->set_team($USER->get_id(), @$_POST["select_teamP_joueur"], @$_POST["select_teamS_joueur"]);
 

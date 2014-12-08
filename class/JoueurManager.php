@@ -155,9 +155,11 @@ class JoueurManager {
     }
     
     public function update_vaisseau($id_joueur, $vaisseau){
-        $query = "UPDATE ".MyPDO::DB_FLAG."joueur_possede_vaisseau SET nom=?, LTI=?, WHERE id_joueur=1 AND id_vaisseau=?)";
+        $query = "UPDATE ".MyPDO::DB_FLAG."joueur_possede_vaisseau "
+                . "SET nom=?, LTI=?, cargo=?, autonomie=?, coutReparation=?, date_dispo=? WHERE id_joueur=? AND id_jv=?";
 
-        $this->bdd->query($query,$vaisseau->nom,$vaisseau->LTI, $id_joueur,$vaisseau->id_vaisseau);    
+        $this->bdd->query($query,$vaisseau->nom,$vaisseau->LTI, $vaisseau->cargo, $vaisseau->autonomie,
+                $vaisseau->coutReparation, ($vaisseau->date_dispo?$vaisseau->date_dispo:null), $id_joueur, $vaisseau->id_vaisseau);    
     }
     
 
