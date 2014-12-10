@@ -47,7 +47,7 @@ class JoueurManager {
                 WHERE id_joueur=?";
         $this->bdd->query($query,$id);
         
-        $query="DELETE FROM ".MyPDO::DB_FLAG."joueur_possede_vaiss
+        $query="DELETE FROM ".MyPDO::DB_FLAG."joueur_possede_vaisseau
                 WHERE id_joueur=?";
         $this->bdd->query($query,$id);
     

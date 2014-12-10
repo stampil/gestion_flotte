@@ -34,5 +34,10 @@ $menu_actif='class="actif"';
     <div <?php if($action=='ajout_alliance') echo $menu_actif ?> action="ajout_alliance">Ajout alliance</div>
     <div <?php if($action=='ajout_alliance_team') echo $menu_actif ?> action="ajout_alliance_team">Ajout alliance team</div>
     <div <?php if($action=='ajout_groupe_alliance') echo $menu_actif ?> action="ajout_groupe_alliance">Ajout groupe d'alliance</div>
-    <?php } ?>
+    <?php }
+    if(is_connected("ADMIN")){
+        ?>
+    <div action="test">Test</div>
+     <?php }
+    ?>
 </div>

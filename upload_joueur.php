@@ -16,6 +16,10 @@ if(isset($_POST["select_teamP_joueur"][0]) && $_POST["select_teamP_joueur"][0]){
     if( isset($check_handle->success) && !$check_handle->success && isset($check_handle->msg)){
         $uploadErr.= $check_handle->msg;
     }
+    
+    if(!Joueur::check_handle($_POST["handle"])){
+      $uploadErr.= "<p>Handle non reconnu </p>";
+    }
 }
 else{
      $uploadErr.= "<p>Vous devez faire partie d'une team pour utiliser cet outil.</p>";
