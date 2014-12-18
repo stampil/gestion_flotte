@@ -1,14 +1,45 @@
 <?php
-$menu_actif='class="actif"';
-
-
+$menu_actif='actif';
 ?>
 
 <link rel="stylesheet" href="css/menu.css" type="text/css" media="screen" />
 <script src='js/menu.js'></script>
-<div id="menu">
-    <div <?php if($action=='accueil') echo $menu_actif ?> action="accueil">Accueil</div>
-    <div <?php if($action=='connexion') echo $menu_actif ?> action="connexion">Connexion</div>
+
+<table width="440" border="0" align="center" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td><div align="center" class="menu <?php if($action=='accueil') echo $menu_actif ?>"><a href="?action=accueil">accueil</a></div></td>
+                        <td><div align="center"><img src="images/menuSeparateur.gif" width="3" height="27"></div></td>
+                        
+                        <?php 
+     if(!is_connected() || is_connected("ADMIN")){
+    ?>
+                        <td><div align="center" class="menu <?php if($action=='ajout_joueur') echo $menu_actif ?>"><a href="?action=ajout_joueur">s'ajouter</a></div></td>
+                        <td><div align="center"><img src="images/menuSeparateur.gif" width="3" height="27"></div></td>
+                        <td><div align="center" class="menu <?php if($action=='ajout_team') echo $menu_actif ?>" ><a href="?action=ajout_team">Ajouter une team</a></div></td>
+                        <td><div align="center"><img src="images/menuSeparateur.gif" width="3" height="27"></div></td>
+                        <td><div align="center"><img src="images/menuSeparateur.gif" width="3" height="27"></div></td>
+                        <td><div align="center" class="menu" <?php if($action=='connexion') echo $menu_actif ?>><a href="?action=connexion">Connexion</a></div></td>
+     <?php }
+                            if(is_connected()){
+                        ?>
+                        
+                        <td><div align="center" class="menu  <?php if($action=='modif_joueur') echo $menu_actif ?>"><a href="?action=modif_joueur">Modif infos</a></div></td>
+                        <td><div align="center"><img src="images/menuSeparateur.gif" width="3" height="27"></div></td>    
+                        <td><div align="center" class="menu  <?php if($action=='voir_team') echo $menu_actif ?>"><a href="?action=voir_team">Info Team</a></div></td>
+                        <td><div align="center"><img src="images/menuSeparateur.gif" width="3" height="27"></div></td>    
+                        <td><div align="center" class="menu  <?php if($action=='voir_groupe_alliance') echo $menu_actif ?>"><a href="?action=voir_groupe_alliance">Info Gr Alliance</a></div></td>
+    
+                            <?php } ?>
+                        
+                        
+                    </tr>
+</table>
+
+
+
+
+<div id="menu" style="display:none">
+
     <?php
     if(is_connected("ADMIN")){   
     ?>
@@ -19,8 +50,7 @@ $menu_actif='class="actif"';
     <?php } 
      if(!is_connected() || is_connected("ADMIN")){
     ?>
-    <div <?php if($action=='ajout_team') echo $menu_actif ?> action="ajout_team">Ajout team</div>
-    <div <?php if($action=='ajout_joueur') echo $menu_actif ?> action="ajout_joueur">Ajout joueur</div>
+
     <?php }
     if(is_connected()){
     ?>

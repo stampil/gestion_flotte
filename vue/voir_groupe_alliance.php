@@ -17,7 +17,6 @@ $allianceM = new AllianceGroupeManager();
         <th>Logo</th>
         <th>Charte</th>
         <th>Membres</th>
-        <th>Flotte</th>
         <th>Capacité soute<br /><span title="Si chacun prend son vaisseau ayant sa meilleur capacité de soute" class="help">Min</span>/<span title="si ceux qui ont plusieurs gros vaisseau les pretes a ceux qui ont des vaisseaux de petites soute" class="help">Max</span>/<span title="somme de toutes les soutes" class="help">Total</span></th>
 
     </tr>
@@ -34,11 +33,14 @@ $allianceM = new AllianceGroupeManager();
             echo     '<td><div class="displayLimited">'.$alliance_groupe[$i]->description.'</div></td>';
             echo '<td>';
             foreach($get_allied as $o){
-                echo '<img src="upload/team/'.$o->logo.'" class="logoMini" title="'.$o->nom.'" />';
+                echo '<img src="upload/team/'.$o->logo.'" class="logoMini" title="'.$o->nom.'" /> ';
             }
             echo '</td>';
             
-            echo '<td class="alignLeft">';
+            
+            echo '<td>x / x / '.number_format($cargo, 0, ",", " ").' Freight&nbsp;Units</td>';
+             echo '</tr>';
+             echo '<tr><td colspan="5" class="alignLeft">';
             foreach($flotte as $o){
 
                 $cargo+=$o->cargo*$o->nb;
@@ -49,9 +51,7 @@ $allianceM = new AllianceGroupeManager();
             . '</div>'
             . '</div>';                
             }
-            echo'</td>';
-            echo '<td>x / x / '.number_format($cargo, 0, ",", " ").' Freight&nbsp;Units</td>';
-             echo '</tr>';
+            echo'</td></tr>';
     }
     ?>
 </table>

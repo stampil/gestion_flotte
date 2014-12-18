@@ -1,0 +1,109 @@
+/* Mise en forme du body */
+
+
+body {
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	background-image: url(../images/bg.jpg);
+	background-repeat: repeat-x;
+	background-color:#40424d;
+}
+
+
+
+
+/* Mise en forme des textes */
+
+
+.titre {
+font-family: Verdana, Arial, Helvetica, sans-serif;
+font-size: 17px;
+color: #8089A0;
+
+}
+
+
+.texte {
+font-family: Verdana, Arial, Helvetica, sans-serif;
+font-size: 10px;
+color: #848692;
+
+}
+
+.texteKitgrafik {
+font-family: Verdana, Arial, Helvetica, sans-serif;
+font-size: 9px;
+color: #d1d1d1;
+
+}
+
+
+
+/* Liens par défault */
+
+a:link {
+	color: #848692;
+	text-decoration: underline;
+	font-size: inherit;
+}
+
+a:visited {
+	color: #848692;
+	text-decoration: underline;
+	font-size: inherit;
+}
+a:hover {
+	color: #000000;
+	text-decoration: none;
+	font-size: inherit;
+}
+
+
+
+/* Liens pour menu1 */
+
+.menu a:link {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	color: #848692;
+	text-decoration: none;
+}
+
+.menu a:visited {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	color: #848692;
+	text-decoration: none;
+}
+
+.menu a:hover {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	color: #000000;
+	text-decoration: none;
+}
+
+
+
+
+/* Autres */
+
+
+.boiteFormulaire {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 9px;
+	color: #848692;
+	border: 1px solid #c5c7cb;
+	background-color: #ffffff;
+}
+
+.tiret {
+	border-bottom-width: 1px;
+	border-top-style: none;
+	border-right-style: none;
+	border-bottom-style: dotted;
+	border-left-style: none;
+	border-bottom-color: #dfe2e8;
+}

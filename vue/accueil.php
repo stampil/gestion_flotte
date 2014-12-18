@@ -1,8 +1,4 @@
 <?php
-include_once 'template/menu.php';
-?>
-
-<?php
 if(isset($_GET["mess"])){
     echo '<div class="warning">'.$_GET["mess"].'</div>';
 }
@@ -14,4 +10,4 @@ vos potes sont plutot orienté combat ? commerce ?
 et une gestion d'évenement : qui sera la pour votre sortie le tel jour à tel heure, qui sera affecté à l'escorte etc...<br />
 mais ça, c'est bientot ;)<br />
 
-<img src="doc/mcd.jpg" />
+<img src="doc/mcd.jpg" width="580" />

@@ -15,7 +15,6 @@ $joueur= $teamM->get_membre($teams[0]->id_team);
         <th>Nom</th>
         <th>Logo</th>
         <th>Orientation</th>
-        <th>Flotte</th>
         <th>Capacité soute<br /><span title="Si chacun prend son vaisseau ayant sa meilleur capacité de soute" class="help">Min</span>/<span title="si ceux qui ont plusieurs gros vaisseau les pretes a ceux qui ont des vaisseaux de petites soute" class="help">Max</span>/<span title="somme de toutes les soutes" class="help">Total</span></th>
 
     </tr>
@@ -30,12 +29,16 @@ $joueur= $teamM->get_membre($teams[0]->id_team);
         echo '<td valign="middle" class="alignLeft">';
             
             foreach($orientation_team as $o){
-               echo '<img src="upload/orientation/'.$o->logo.'" class="logoMini help" title="'.$o->nom.'" />';
+               echo '<img src="upload/orientation/'.$o->logo.'" class="logoMini help" title="'.$o->nom.'" /> ';
             }
             
             echo '</td>';
             
-        echo '<td class="alignLeft">';
+       
+        
+         echo '<td>x / x / '.number_format($cargo, 0, ",", " ").' Freight&nbsp;Units</td>';
+        echo '</tr>';
+         echo '<tr><td class="alignLeft" colspan="4">';
             foreach($flotte as $o){
             $cargo+=$o->cargo*$o->nb;
             echo '<div class="container_vaisseauMedium reduce">'
@@ -46,10 +49,7 @@ $joueur= $teamM->get_membre($teams[0]->id_team);
             . '</div>';
 
             }
-        echo '</td>';
-        
-         echo '<td>x / x / '.number_format($cargo, 0, ",", " ").' Freight&nbsp;Units</td>';
-        echo '</tr>';
+        echo '</td></tr>';
     }
     ?>
 </table>
@@ -61,7 +61,7 @@ $joueur= $teamM->get_membre($teams[0]->id_team);
             <th>Team</th>
             <th>Avatar</th>
             <th>Orientation</th>
-            <th>Vaisseau</th>
+            
         </tr>
         <?php
         $tr ="";
@@ -82,10 +82,11 @@ $joueur= $teamM->get_membre($teams[0]->id_team);
             . '<td><img class="logoMedium" src="upload/joueur/' . $joueur[$i]->img . '"></td>'
             . '<td valign="middle" class="alignLeft">';
             foreach($orientation_joueur as $o){
-                $tr.= '<img src="upload/orientation/'.$o->logo.'" class="logoMini help" title="'.$o->nom.'" />';
+                $tr.= '<img src="upload/orientation/'.$o->logo.'" class="logoMini help" title="'.$o->nom.'" /> ';
             }
             $tr.= '</td>'
-            . '<td valign="middle" class="alignLeft">';
+            . '</tr>';
+            $tr.= '<tr><td valign="middle" class="alignLeft" colspan="4">';
             
             foreach($vaisseau_joueur as $o){
 

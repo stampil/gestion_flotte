@@ -1,5 +1,5 @@
 <?php
-include_once 'template/menu.php';
+
 $joueurM = new JoueurManager($bdd);
 $last_joueur = $joueurM->get_all_joueur(50);
 $orientationM = new OrientationManager($bdd);
@@ -70,9 +70,9 @@ $team = $teamM->get_all_team();
                 </td>
             </tr>
             <tr>
-                <td>Vaisseaux:</td>
-                <td>
 
+                <td colspan='2'>
+                    <p>Vaisseaux:</p>
                        
                         <table class="table">
                         <?php

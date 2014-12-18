@@ -1,29 +1,4 @@
-<?php
 
-
-if(@$_POST["deco"]){
-    
-    session_destroy();
-}
-
-if(@$_POST["email"]){
-    $email = $_POST["email"];
-    $mdp = $crypt->crypte($_POST["mdp"]);
-    
-    $joueurM = new JoueurManager();
-    $joueur = $joueurM->identifie_joueur($email, $mdp);
-    if($joueur){
-        $USER=new Joueur($joueur[0]);
-        $_SESSION["sjoueur"]= serialize($USER);     
-    }
-    else{
-        echo "<p>mdp invalide</p>";
-    }
-}
-include_once 'template/menu.php';
-
-
-?>
 
 
 <?php

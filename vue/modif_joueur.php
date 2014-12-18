@@ -74,16 +74,16 @@ $teamU = $joueurM->get_team($USER->get_id());
                 </td>
             </tr>
             <tr>
-                <td>Vaisseaux:</td>
-                <td>
-
+                
+                <td colspan="2">
+                    <p>Vaisseaux : </p>
                        
                         <table class="table">
                             <tr>
-                                <th>Nom</th><th>Constructeur</th><th>Type</th><th>LTI</th><th><span class="help" title="Mettre la date réel si en réparation">Date dispo</span></th><th>Cargo</th><th>Autonomie</th><th>Cout réparation</th><th></th>
+                                <th>Nom</th><th>Const.</th><th>Type</th><th>LTI</th><th><span class="help" title="Mettre la date réel si en réparation">Date dispo</span></th><th>Cargo</th><th><a title="Autonomie">Aut.</a></th><th>Cout rép.</th><th></th>
                             </tr>
                             <tr>
-                            <td><input type="text" value="<?php echo uniqid("ship_") ?>" name="nom[0]" /></td>
+                            <td><input type="text" value="<?php echo uniqid("ship_") ?>" name="nom[0]" class="textMedium" /></td>
                             <td colspan="2"><select name="ajout_vaisseau" class="select"><option value="0">Ajouter un vaisseau</option>
                                 <?php
                                 foreach($vaisseau as $o){
@@ -99,7 +99,7 @@ $teamU = $joueurM->get_team($USER->get_id());
 
                             foreach($vaisseauU as $o){
                                echo '<tr><td>';
-                               echo '<input type="text" value="'.$o->nom.'" name="nom['.$o->id_jv.']" />';
+                               echo '<input type="text" class="textMedium" value="'.$o->nom.'" name="nom['.$o->id_jv.']" />';
                                echo'</td><td>';
                                echo '<img src="upload/constructeur/'.$o->constructeurLogo.'" title="'.$o->constructeur.'"/>';
                                echo'</td><td>';
@@ -107,7 +107,7 @@ $teamU = $joueurM->get_team($USER->get_id());
                                echo '</td><td>';
                                echo '<input type="checkbox" title="cochez si LTI" name="LTI['.$o->id_jv.']" '.($o->LTI?'checked="checked"':'').' />';
                                echo '</td><td>';
-                               echo '<input type="date" name="date_dispo['.$o->id_jv.']" value="'.$o->date_dispo.'" />';
+                               echo '<input type="date" name="date_dispo['.$o->id_jv.']" class="textMedium" value="'.$o->date_dispo.'" />';
                                echo '</td><td>';
                                echo '<input type="number" name="cargo['.$o->id_jv.']" class="numberTiny" value="'.($o->modifCargo===null?$o->cargo:$o->modifCargo).'" />';
                                echo '</td><td>';
@@ -115,7 +115,7 @@ $teamU = $joueurM->get_team($USER->get_id());
                                echo '</td><td>';
                                echo '<input type="number" name="coutReparation['.$o->id_jv.']" class="numberTiny" value="'.($o->modifCoutReparation===null?$o->coutReparation:$o->modifCoutReparation).'" />';
                                echo '</td><td>';
-                               echo '<a name="supprimer" href="?action=modif_joueur&supp_ship='.$o->id_jv.'">Supprimer</a>';
+                               echo '<a name="supprimer" href="?action=modif_joueur&supp_ship='.$o->id_jv.'" title="Supprimer"><img src="images/trash.png" alt="Supprimer" /></a>';
                                echo '</td></tr>';
                             }
                             
