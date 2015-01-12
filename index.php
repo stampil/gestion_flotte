@@ -49,7 +49,7 @@ if(@$_POST["email"]){
                     include_once 'template/menu.php';
                 ?>
         </div>
-    <video id="vid" width="1920"  autoplay="autoplay" loop>
+        <video id="vid" width="100%"  autoplay="autoplay" loop>
         <source src="video/fog effect.mp4" type="video/mp4" />
     </video>
     <div class="content">
@@ -65,12 +65,14 @@ if(@$_POST["email"]){
         };
         
         $(function() {
-            ajustVideo();
+            //ajustVideo();
             $( window ).resize(function(){
                 ajustVideo();
                 console.log('resize',$(window).outerWidth());
             });
         });
     </script>
+             <script src="js/commun.js"></script>
+        <script src="js/<?php echo $action?>.js"></script>
 </body>
 </html>
