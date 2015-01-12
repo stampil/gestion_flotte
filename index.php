@@ -49,8 +49,8 @@ if(@$_POST["email"]){
                     include_once 'template/menu.php';
                 ?>
         </div>
-    <video id="vid" width="1920"  autoplay="autoplay">
-        <source src="video/Imagine Star Citizen.mp4" type="video/mp4" />
+    <video id="vid" width="1920"  autoplay="autoplay" loop>
+        <source src="video/fog effect.mp4" type="video/mp4" />
     </video>
     <div class="content">
         <?php

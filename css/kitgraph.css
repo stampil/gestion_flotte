@@ -1,5 +1,5 @@
 body{
-    background:url('http://medias.jeuxonline.info/upload/starcitizen/Wallpapers/Squadron4228801c.png') black fixed no-repeat;
+    background:url('../images/background.jpg') black fixed no-repeat 0 -425px;
     margin:0;
     padding:0;
     font-family: "Fira Mono";
@@ -16,7 +16,7 @@ body{
     border-bottom-right-radius: 20px;
     z-index: 2;
     position: relative;
-    opacity: 0.8;
+    opacity: 0.9;
     box-shadow: 1px 1px 12px #555;
 
 }
