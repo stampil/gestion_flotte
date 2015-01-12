@@ -1,6 +1,6 @@
 #menu{
     margin: 0 0 10px 0;
-    background:#E7E7E7;
+    background:black;
     
 }
 
@@ -8,10 +8,13 @@
     display:inline-block;
     padding: 5px 10px;
     cursor:pointer;
-    background: #d6d1d1;
     border: 1px solid transparent;
 }
 
+#menu a:hover{
+    color:greenyellow;
+}
+
 #menu .actif{
-    border: 1px solid black;
+    border: 1px solid greenyellow;
 }

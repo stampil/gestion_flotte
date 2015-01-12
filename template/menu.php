@@ -8,25 +8,25 @@ $menu_actif='actif';
 <table width="440" border="0" align="center" cellpadding="0" cellspacing="0">
                     <tr>
                         <td><div align="center" class="menu <?php if($action=='accueil') echo $menu_actif ?>"><a href="?action=accueil">accueil</a></div></td>
-                        <td><div align="center"><img src="images/menuSeparateur.gif" width="3" height="27"></div></td>
+                        <td></td>
                         
                         <?php 
      if(!is_connected() || is_connected("ADMIN")){
     ?>
                         <td><div align="center" class="menu <?php if($action=='ajout_joueur') echo $menu_actif ?>"><a href="?action=ajout_joueur">s'ajouter</a></div></td>
-                        <td><div align="center"><img src="images/menuSeparateur.gif" width="3" height="27"></div></td>
+                        <td></td>
                         <td><div align="center" class="menu <?php if($action=='ajout_team') echo $menu_actif ?>" ><a href="?action=ajout_team">Ajouter une team</a></div></td>
-                        <td><div align="center"><img src="images/menuSeparateur.gif" width="3" height="27"></div></td>
-                        <td><div align="center"><img src="images/menuSeparateur.gif" width="3" height="27"></div></td>
+                        <td></td>
+                        <td></td>
                         <td><div align="center" class="menu" <?php if($action=='connexion') echo $menu_actif ?>><a href="?action=connexion">Connexion</a></div></td>
      <?php }
                             if(is_connected()){
                         ?>
                         
                         <td><div align="center" class="menu  <?php if($action=='modif_joueur') echo $menu_actif ?>"><a href="?action=modif_joueur">Modif infos</a></div></td>
-                        <td><div align="center"><img src="images/menuSeparateur.gif" width="3" height="27"></div></td>    
+                        <td></td>    
                         <td><div align="center" class="menu  <?php if($action=='voir_team') echo $menu_actif ?>"><a href="?action=voir_team">Info Team</a></div></td>
-                        <td><div align="center"><img src="images/menuSeparateur.gif" width="3" height="27"></div></td>    
+                        <td></td>    
                         <td><div align="center" class="menu  <?php if($action=='voir_groupe_alliance') echo $menu_actif ?>"><a href="?action=voir_groupe_alliance">Info Gr Alliance</a></div></td>
     
                             <?php } ?>
