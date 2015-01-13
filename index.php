@@ -49,9 +49,17 @@ if(@$_POST["email"]){
                     include_once 'template/menu.php';
                 ?>
         </div>
-        <video id="vid" width="100%"  autoplay="autoplay" loop>
+        
+        <video class="vid" id="vid1" width="100%"  autoplay="autoplay">
+        <source src="video/auzgk  action essentials 2 - smoke atmosphere 4 HD.mp4" type="video/mp4" />
+    </video>
+        <video class="vid" id="vid2" width="100%" autoplay="autoplay" loop>
         <source src="video/fog effect.mp4" type="video/mp4" />
     </video>
+        <video class="vid" id="vid3" width="100%" autoplay="autoplay">
+        <source src="video/auzgk  action essentials 2 - falling  sparks HD.mp4" type="video/mp4" />
+    </video>
+        
     <div class="content">
         <?php
         include_once 'vue/' . $action . '.php';
@@ -61,15 +69,33 @@ if(@$_POST["email"]){
     </div>
     <script>
         var ajustVideo = function(){
-            $('#vid').attr('width',$(window).outerWidth());
+            $('.vid').attr('width',1.25*$(window).outerWidth());
         };
         
         $(function() {
             //ajustVideo();
             $( window ).resize(function(){
                 ajustVideo();
-                console.log('resize',$(window).outerWidth());
+                console.log('resize',1.25*$(window).outerWidth());
             });
+            
+
+            $( "#vid1, #vid3" ).animate({
+                opacity: 0.5
+              }, 4000);
+              
+            $( "#vid2" ).animate({
+                opacity: 0.9
+              }, 10000, function(){
+                  $( "#vid2" ).animate({
+                opacity: 0.2
+              }, 60000);
+              });
+              
+               $("#vid1, #vid3").bind('ended', function(){
+                   $(this).css('opacity',0);
+               });
+  
         });
     </script>
              <script src="js/commun.js"></script>

@@ -26,6 +26,17 @@ $allianceM = new AllianceGroupeManager();
         $cargo=0;
         $get_allied = $allianceM->get_allied($alliance_groupe[$i]->id_alliance);
         $flotte = $allianceM->get_flotte($alliance_groupe[$i]->id_alliance);
+        $flotte_html='';
+        foreach($flotte as $o){
+
+                $cargo+=$o->cargo*$o->nb;
+                $flotte_html.= '<div class="container_vaisseauMedium reduce">'
+            . '<img src="upload/vaisseau/'.$o->img.'" class="vaisseauMedium help"  />'
+            . '<div class="in_container_vaisseauMedium visible">'
+            . '<div title="'.$o->nb.'x '.$o->vaisseau.' ('.($o->sum_cargo).' FU)">'.$o->nb.'</div>'
+            . '</div>'
+            . '</div>';                
+            }
         echo '<tr>'
         . '<td valign="middle"><a href="'.($alliance_groupe[$i]->url?$alliance_groupe[$i]->url:'#').'" target="_blank">'.$alliance_groupe[$i]->nom.'</a></td>';
             if($alliance_groupe[$i]->logo)   echo '<td><img class="logoMedium" src="upload/groupeAlliance/'.$alliance_groupe[$i]->logo.'"></td>';
@@ -41,16 +52,7 @@ $allianceM = new AllianceGroupeManager();
             echo '<td>x / x / '.number_format($cargo, 0, ",", " ").' Freight&nbsp;Units</td>';
              echo '</tr>';
              echo '<tr><td colspan="5" class="alignLeft">';
-            foreach($flotte as $o){
-
-                $cargo+=$o->cargo*$o->nb;
-                            echo '<div class="container_vaisseauMedium reduce">'
-            . '<img src="upload/vaisseau/'.$o->img.'" class="vaisseauMedium help"  />'
-            . '<div class="in_container_vaisseauMedium visible">'
-            . '<div title="'.$o->nb.'x '.$o->vaisseau.' ('.($o->sum_cargo).' FU)">'.$o->nb.'</div>'
-            . '</div>'
-            . '</div>';                
-            }
+            echo $flotte_html;
             echo'</td></tr>';
     }
     ?>

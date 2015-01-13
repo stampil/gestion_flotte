@@ -21,13 +21,17 @@ body{
 
 }
 
-#vid{
+.vid{
     position: fixed;
     top:0;
     left:0;
     z-index: 1;
     overflow:hidden;
-    opacity: 0.5
+    opacity: 0
+}
+
+#vid2{
+    opacity:0;
 }
 
 #menu{

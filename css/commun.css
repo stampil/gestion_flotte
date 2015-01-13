@@ -22,7 +22,7 @@
 .table{
     border:1px solid black;
     margin:10px 5px;
-    max-width:581px;
+    /*max-width:581px;*/
 }
 
 .table td,.table th{

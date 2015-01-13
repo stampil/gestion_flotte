@@ -23,8 +23,21 @@ $joueur= $teamM->get_membre($teams[0]->id_team);
         $cargo=0;
         $orientation_team = $teamM->get_orientation($teams[$i]->id_team);
         $flotte = $teamM->get_flotte($teams[$i]->id_team);
+        $flotte_html ='';
+        foreach($flotte as $o){
+            $cargo+=$o->cargo*$o->nb;
+            $flotte_html.= '<div class="container_vaisseauMedium reduce">'
+            . '<img src="upload/vaisseau/'.$o->img.'" class="vaisseauMedium help"  />'
+            . '<div class="in_container_vaisseauMedium visible">'
+            . '<div title="'.$o->nb.'x '.$o->vaisseau.' ('.($o->cargo*$o->nb).' FU)">'.$o->nb.'</div>'
+            . '</div>'
+            . '</div>';
+
+            }
+            
+            
         echo '<tr>'
-        . '<td valign="middle"><a href="'.$teams[$i]->url.'" target="_blank">'.$teams[$i]->nom.'</a></td>'
+        . '<td valign="middle"><a href="'.$teams[$i]->url.'" target="_blank">'.$teams[$i]->nom.'</a><br />'.count($joueur).' membre'.(count($joueur)>1?'s':'').' inscrit'.(count($joueur)>1?'s':'').'</td>'
         . '<td><img class="logoBig" src="upload/team/'.$teams[$i]->logo.'"></td>';
         echo '<td valign="middle" class="alignLeft">';
             
@@ -39,16 +52,7 @@ $joueur= $teamM->get_membre($teams[0]->id_team);
          echo '<td>x / x / '.number_format($cargo, 0, ",", " ").' Freight&nbsp;Units</td>';
         echo '</tr>';
          echo '<tr><td class="alignLeft" colspan="4">';
-            foreach($flotte as $o){
-            $cargo+=$o->cargo*$o->nb;
-            echo '<div class="container_vaisseauMedium reduce">'
-            . '<img src="upload/vaisseau/'.$o->img.'" class="vaisseauMedium help"  />'
-            . '<div class="in_container_vaisseauMedium visible">'
-            . '<div title="'.$o->nb.'x '.$o->vaisseau.' ('.($o->cargo*$o->nb).' FU)">'.$o->nb.'</div>'
-            . '</div>'
-            . '</div>';
-
-            }
+            echo $flotte_html;
         echo '</td></tr>';
     }
     ?>
