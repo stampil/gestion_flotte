@@ -1,3 +1,9 @@
+
+    <?php
+                    include_once 'template/calendrier.php';
+    ?>
+</div>
+<div class="content">
 <?php
 if(isset($_GET["mess"])){
     echo '<div class="warning">'.$_GET["mess"].'</div>';
@@ -11,3 +17,6 @@ et une gestion d'évenement : qui sera la pour votre sortie le tel jour à tel h
 mais ça, c'est bientot ;)<br />
 
 <img src="doc/mcd.jpg" width="100%" />
+
+
+

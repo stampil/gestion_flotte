@@ -1,5 +1,6 @@
 <?php
 include_once 'template/menu.php';
+if(!is_connected()) exit("veuillez vous (re)connectez");
 $constructeurM = new ConstructeurManager($bdd);
 $last_constructeur = $constructeurM->get_all_constructeur();
 ?>

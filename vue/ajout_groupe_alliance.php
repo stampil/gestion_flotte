@@ -1,5 +1,6 @@
 <?php
 include_once 'template/menu.php';
+if(!is_connected()) exit("veuillez vous (re)connectez");
 $allianceM = new AllianceGroupeManager($bdd);
 $alliance_groupe = $allianceM->get_all_allianceGroupe();
 $teamM = new TeamManager($bdd);

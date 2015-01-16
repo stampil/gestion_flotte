@@ -1,5 +1,6 @@
 <?php
 include_once 'template/menu.php';
+if(!is_connected()) exit("veuillez vous (re)connectez");
 $vaisseauM = new VaisseauManager($bdd);
 $last_vaisseau = $vaisseauM->get_all_vaisseau();
 $constructeurM = new ConstructeurManager($bdd);

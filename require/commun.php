@@ -1,5 +1,7 @@
 <?php
 
+date_default_timezone_set('Europe/Paris');
+
 spl_autoload_register(function($class) {
     include 'class/' . $class . '.php';
 });
@@ -91,6 +93,12 @@ function API($path, $data){
     $result = @file_get_contents($url, false, $context);
     $result = json_decode($result);
     return $result;
+}
+
+$jours = array("DIM","LUN","MAR","MER","JEU","VEN","SAM");
+
+function usdatetotime($usdate){
+    return preg_replace("/[0-9]{4}-[0-9]{2}-[0-9]{2} ([0-9]{2}):([0-9]{2}):[0-9]{2}/", "$1h$2", $usdate);
 }
 
 ?>

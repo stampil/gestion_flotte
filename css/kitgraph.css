@@ -1,5 +1,5 @@
 body{
-    background:url('../images/background.jpg') black fixed no-repeat 0 -425px;
+    background:url('../images/background.jpg') black fixed no-repeat 0 -310px;
     margin:0;
     padding:0;
     font-family: "Fira Mono";
@@ -18,6 +18,7 @@ body{
     position: relative;
     opacity: 0.9;
     box-shadow: 1px 1px 12px #555;
+    overflow:hidden;
 
 }
 
@@ -46,4 +47,17 @@ body{
     color:white;
     padding:10px;
     text-align: center;
+}
+
+.calendrier{
+    border:1px solid black;
+    border-collapse: collapse;
+}
+
+.calendrier td, .calendrier th{
+    border:1px solid black;
+    padding:5px;
+}
+.calendrier th a{
+ text-decoration: none;
 }

@@ -1,5 +1,6 @@
 <?php
 include_once 'template/menu.php';
+if(!is_connected()) exit("veuillez vous (re)connectez");
 $orientationM = new OrientationManager($bdd);
 $orientation = $orientationM->get_all_orientation();
 ?>
