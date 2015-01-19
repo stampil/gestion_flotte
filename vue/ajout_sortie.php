@@ -23,8 +23,12 @@ $teamspeak = $teamspeakM->get_teamspeak();
     </tr>
     <tr>
         <td>Organisateur</td>
-        <td><input type="text" readonly="readonly" value="[<?php echo $USER->get_team()[0]->tag."] ".
-                $USER->get_handle(); ?>" /></td>
+        <td><input type="text" readonly="readonly" value="[<?php
+		if($USER){
+		$p = $USER->get_team();
+		echo $p[0]->tag.'] '.
+                $USER->get_handle();
+}					?>" /></td>
     </tr>
     <tr>
         <td>Teamspeak</td>
