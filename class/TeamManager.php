@@ -30,7 +30,7 @@ class TeamManager {
     public function get_all_team($limit = null){
         $query="SELECT id_team, nom, tag, url, nbJoueur, logo 
                 FROM ".MyPDO::DB_FLAG."team
-                order by id_team desc "; 
+                order by nom "; 
         if(is_int($limit)){
             $query.=" LIMIT 0, $limit";
         }

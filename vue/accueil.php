@@ -1,22 +1,24 @@
 
-    <?php
-                    include_once 'template/calendrier.php';
-    ?>
-</div>
-<div class="content">
 <?php
 if(isset($_GET["mess"])){
     echo '<div class="warning">'.$_GET["mess"].'</div>';
 }
+
+include_once 'template/calendrier.php';
+
+$teamM = new TeamManager($bdd);
+$team = $teamM->get_all_team();
 ?>
-Bonjour, bientot vous pourrez utiliser ce site de gestion sur starcitizen, pour savoir quel coéquipier à quel vaisseau,
-votre guilde est allié avec quelle autre, mais surtout quelles sont les autres alliances de vos guildes alliés, quel est la flotte de votre team, de vos alliés...
-et puis surement a l'avenir, une gestion de flotte ( qui à quoi en ce moment ( pas en reparation ) avec qu'elle autonomie et quantité de soutes...
-vos potes sont plutot orienté combat ? commerce ?
-et une gestion d'évenement : qui sera la pour votre sortie le tel jour à tel heure, qui sera affecté à l'escorte etc...<br />
-mais ça, c'est bientot ;)<br />
+</div>
 
-<img src="doc/mcd.jpg" width="100%" />
+<div class="content">
+<?php
+$html="<br />";
+foreach ($team as $o) {
+    $html.= '<a href="'.$o->url.'">'.$o->nom.'<a><hr />';
+    
+}
+$html = substr($html, 0,-6)."<br /><br />";
 
-
-
+echo $html;
+?>

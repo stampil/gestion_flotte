@@ -8,12 +8,15 @@ class Sortie {
     private $detail;
     private $debut;
     private $fin;
+    private $id_teamspeak;
+
 
 
     public function __construct($o = null) {
         if ($o) {
             $this->set_id($o->id_sortie);
             $this->set_id_organisateur($o->id_organisateur);
+            $this->set_id_teamspeak($o->id_teamspeak);
             $this->set_titre($o->titre);
             $this->set_detail($o->detail);
             $this->set_debut($o->debut);
@@ -30,11 +33,19 @@ class Sortie {
     }
     
     public function get_id_organisateur(){
-        return $this->id;
+        return $this->id_organisateur;
     }
     
     public function set_id_organisateur($id_organisateur){
         $this->id_organisateur = $id_organisateur;
+    }
+
+    public function get_id_teamspeak(){
+        return $this->id_teamspeak;
+    }
+    
+    public function set_id_teamspeak($id_teamspeak){
+        $this->id_teamspeak = $id_teamspeak;
     }
     
     public function get_titre(){

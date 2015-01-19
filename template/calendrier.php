@@ -18,12 +18,14 @@ $sorties  = $sortieM->get_range_sortie($date_deb, $date_fin);
             for ($i=0;$i<15;$i++){
                 echo '<td class="jour_'.$i.'">';
                 $date =date("Y-m-d",  strtotime(" +$i day"));
+                $html="";
                 foreach ($sorties as $value) {
                     if(preg_match("/$date/", $value->debut)){
-                        echo '<a href="?action=voir_sortie&sortie='.$value->id_sortie.'"><img src="upload/team/'.$value->logoTeam.'" class="logoMini" title="Debut:'.usdatetotime($value->debut).' fin: '.usdatetotime($value->fin).' cliquer pour les details"></a><br />'.$value->titre.'<hr />';
+                        $html.= '<a href="?action=voir_sortie&sortie='.$value->id_sortie.'">'.usdatetotime($value->debut).'&nbsp;:<br /><img src="upload/team/'.$value->logoTeam.'" class="logoMini" title="De '.usdatetotime($value->debut).' à '.usdatetotime($value->fin).' cliquer pour les details"></a><br />'.ucfirst($value->titre).'<br /><a href="'.$value->url_ts.'">TS</a><hr />';
                     }
                 }
-                echo '</td>';
+                $html = substr($html, 0,-6);
+                echo $html.'</td>';
             }
             ?>
         </tr>
