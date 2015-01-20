@@ -1,5 +1,6 @@
 
 <?php
+
 if(isset($_GET["mess"])){
     echo '<div class="warning">'.$_GET["mess"].'</div>';
 }

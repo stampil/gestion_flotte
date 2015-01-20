@@ -24,11 +24,9 @@ $teamspeak = $teamspeakM->get_teamspeak();
     <tr>
         <td>Organisateur</td>
         <td><input type="text" readonly="readonly" value="[<?php
-		if($USER){
-		$p = $USER->get_team();
-		echo $p[0]->tag.'] '.
-                $USER->get_handle();
-}					?>" /></td>
+
+		echo $USER->get_team()->get_tag().'] '.$USER->get_handle();
+					?>" /></td>
     </tr>
     <tr>
         <td>Teamspeak</td>
@@ -52,6 +50,14 @@ $teamspeak = $teamspeakM->get_teamspeak();
     <tr>
         <td>Fin</td>
         <td><input name="fin" type="time"  value="23:59" /></td>
+    </tr>
+    <tr>
+        <td>Inscription possible par</td>
+        <td><select name="visibilite">
+                <option value="<?php echo SORTIE_VISIBILITE_TEAM; ?>">Team seulement</option>
+                <option value="<?php echo SORTIE_VISIBILITE_TEAM_ALLIE; ?>">Team + Alliés</option>
+                <option value="<?php echo SORTIE_VISIBILITE_TOUS; ?>">N'importe qui</option>
+            </select></td>
     </tr>
     
         <tr>

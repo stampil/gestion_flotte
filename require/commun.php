@@ -6,6 +6,10 @@ spl_autoload_register(function($class) {
     include 'class/' . $class . '.php';
 });
 
+define("SORTIE_VISIBILITE_TEAM",1);
+define("SORTIE_VISIBILITE_TEAM_ALLIE",2);
+define("SORTIE_VISIBILITE_TOUS",3);
+
 $bdd = new MyPDO();
 $crypt = new Crypt();
 
@@ -53,22 +57,7 @@ function is_connected($check_droit=null){
     else if($check_droit=="ADMIN" && $USER && !$USER->get_admin()){
         return false;
     }
-    if($check_droit=="LOCKER" ){
-        if(!$USER || !$USER->get_id()) return false;
-        $joueurM = new JoueurManager();
-        $team_joueur = $joueurM->get_team($USER->get_id());
-        
-        $teamM = new TeamManager();
-        $lockers = $teamM->get_locker($team_joueur[0]->id_team);
-        
-        if(count($lockers) ){
-            if($team_joueur[0]->locker){
-                return true;
-            }
-            return false;
-        }
-        return true;
-    }
+
     if($USER && $USER->get_id()  && !@$_POST["deco"]) return true;
     return false;
 }

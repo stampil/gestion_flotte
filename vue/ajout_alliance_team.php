@@ -12,7 +12,7 @@ if(isset($_POST["select_teamA"])){
 }
 
 $team = $teamM->get_all_team();
-$allied = $allianceM->get_all_alliance_team($teams[0]->id_team);
+$allied = $allianceM->get_all_alliance_team($teams->get_id());
 $alliance = $allianceM->get_all_alliance();
 
 ?>
@@ -24,7 +24,7 @@ $alliance = $allianceM->get_all_alliance();
                 <td>
                 <select id="select_teamA" name="select_teamA" class="select">
                         <?php
-                            echo '<option value="'.$teams[0]->id_team.'">' . $teams[0]->nom . '</option>';
+                            echo '<option value="'.$teams->get_id().'">' . $teams->get_nom() . '</option>';
                         ?>
                    </select>
                 </td>      
@@ -47,7 +47,7 @@ $alliance = $allianceM->get_all_alliance();
                 <select id="select_teamB_joueur" name="select_teamB" class="select">
                         <?php
                         for ($i = 0; $i < count($team); $i++) {
-                            if($teams[0]->id_team == $team[$i]->id_team) continue;
+                            if($teams->get_id() == $team[$i]->id_team) continue;
                             echo '<option value="'.$team[$i]->id_team.'">' . $team[$i]->nom . '</option>';
                         }
                         ?>

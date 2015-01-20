@@ -17,7 +17,8 @@ class TeamspeakManager {
     public function get_teamspeak(){
         $query="SELECT id_teamspeak, url, label
                 FROM ".MyPDO::DB_FLAG."teamspeak"; 
-        return $this->bdd->query($query);
+        $ret = $this->bdd->query($query);
+        return $ret[0];
     }
     
     

@@ -5,7 +5,7 @@ if(!is_connected()) exit("veuillez vous (re)connectez");
 $joueurM = new JoueurManager($bdd);
 $teamM = new TeamManager($bdd);
 
-$teams =$joueurM->get_team($USER->get_id());
+$teams =$joueurM->get_all_team($USER->get_id());
 
 $joueur= $teamM->get_membre($teams[0]->id_team);
 ?>
@@ -74,7 +74,7 @@ $joueur= $teamM->get_membre($teams[0]->id_team);
             
             $orientation_joueur = $joueurM->get_orientation($joueur[$i]->id_joueur);
             $vaisseau_joueur = $joueurM->get_vaisseau($joueur[$i]->id_joueur);
-            $team_joueur = $joueurM->get_team($joueur[$i]->id_joueur);
+            $team_joueur = $joueurM->get_all_team($joueur[$i]->id_joueur);
             $tr.= '<tr>'
             . '<td valign="middle">' . $joueur[$i]->handle . '</td>'
                     . '<td>';

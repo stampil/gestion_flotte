@@ -39,7 +39,7 @@ if(@$_POST["email"]){
     $joueurM = new JoueurManager();
     $joueur = $joueurM->identifie_joueur($email, $mdp);
     if($joueur){
-        $USER=new Joueur($joueur[0]);
+        $USER=new Joueur($joueur);
         $_SESSION["sjoueur"]= serialize($USER);     
     }
     else{

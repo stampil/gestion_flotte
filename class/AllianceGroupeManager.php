@@ -36,6 +36,8 @@ class AllianceGroupeManager {
         return $this->bdd->query($query,$id_alliance);
     }
     
+
+    
     public function get_all_allianceGroupe($limit = null){
         $query="SELECT id_alliance, nom, logo, url, description
                 FROM ".MyPDO::DB_FLAG."alliance_groupe

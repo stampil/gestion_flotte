@@ -9,6 +9,8 @@ class Joueur {
     private $creato;
     private $orientation;
     private $team;
+    private $list_team;
+    private $list_alliance;
     private $admin;
     
     public function __construct($jm=null) {
@@ -32,12 +34,20 @@ class Joueur {
         return $this->orientation;
     }
     
-    public function get_team(){ 
+    public function get_all_team(){ 
+        if(!$this->list_team){
+            $teamM = new JoueurManager();
+            $this->list_team = $teamM->get_all_team($this->id_joueur);
+        }
+        return $this->list_team;
+    }
+    
+    public function get_team(){
         if(!$this->team){
             $teamM = new JoueurManager();
             $this->team = $teamM->get_team($this->id_joueur);
         }
-        return $this->team;
+        return new Team($this->team[0]);
     }
     
     public function set_id($id_joueur){
@@ -96,10 +106,20 @@ class Joueur {
         $this->creato = $creato;
     }
     
+    public function get_groupe_alliance(){
+        if(!$this->list_alliance){
+            $alliance_groupeM = new JoueurManager();
+            $this->list_alliance = $alliance_groupeM->get_groupe_alliance($this->id_joueur);
+        }
+        return $this->list_alliance;
+    }
+    
     public static function check_handle($handle){
         $url_check = "https://robertsspaceindustries.com/citizens/".$handle;
         $headers = get_headers($url_check, 1);  
         return preg_match("/200/", $headers[0]);
     }
+    
+
 }
 ?>

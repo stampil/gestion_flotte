@@ -33,7 +33,8 @@ class JoueurManager {
         $query="SELECT id_joueur, handle, img, mdp, email, admin, creato, lastco 
                 FROM ".MyPDO::DB_FLAG."joueur
                 WHERE id_joueur=? "; 
-        return $this->bdd->query($query,$id);
+        $ret =  $this->bdd->query($query,$id);
+        return $ret[0];
     }
     
     public function delete_joueur($id){
@@ -55,7 +56,7 @@ class JoueurManager {
                 WHERE id_joueur=?";
         $this->bdd->query($query,$id);
         
-        unlink("upload/joueur/".$info_joueur[0]->img); 
+        unlink("upload/joueur/".$info_joueur->img); 
     }
     
     public function set_joueur( Joueur $j){
@@ -124,14 +125,24 @@ class JoueurManager {
     }
     
     public function get_team($id_joueur){
-        $query = "SELECT t.id_team, t.nom, t.tag, t.logo, t.url, jdt.principal, jdt.locker 
+        $query = "SELECT t.id_team, t.nom, t.tag, t.logo, t.url, t.nbJoueur, t.mdp, jdt.principal, jdt.locker 
+            FROM ".MyPDO::DB_FLAG."team t
+            JOIN ".MyPDO::DB_FLAG."joueur_dans_team jdt
+            ON t.id_team = jdt.id_team
+            WHERE id_joueur=? AND principal=1";
+        $ret = $this->bdd->query($query,$id_joueur);
+        return $ret;
+    }
+    
+        public function get_all_team($id_joueur){
+        $query = "SELECT t.id_team, t.nom, t.tag, t.logo, t.url, t.nbJoueur, t.mdp, jdt.principal, jdt.locker 
             FROM ".MyPDO::DB_FLAG."team t
             JOIN ".MyPDO::DB_FLAG."joueur_dans_team jdt
             ON t.id_team = jdt.id_team
             WHERE id_joueur=? order by principal desc";
         return $this->bdd->query($query,$id_joueur);
     }
-    
+       
     
     public function set_vaisseau_global($id_joueur, $nb_vaisseau){
         

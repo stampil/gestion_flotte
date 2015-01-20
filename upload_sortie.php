@@ -25,7 +25,8 @@ $sortie = new Sortie((object) array(
     "id_organisateur" =>$USER->get_id(),
     "id_teamspeak" =>$_GET["id_teamspeak"],
     "debut" => $debut,
-    "fin" => $fin
+    "fin" => $fin,
+    "visibilite" =>$_GET["visibilite"]
  ));
 $sortieM->set_sortie($sortie);
 

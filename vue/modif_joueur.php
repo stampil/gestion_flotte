@@ -22,7 +22,7 @@ $vaisseau = $vaisseauM->get_all_vaisseau();
 $vaisseauU = $joueurM->get_vaisseau($USER->get_id());
 
 $team = $teamM->get_all_team();
-$teamU = $joueurM->get_team($USER->get_id());
+$teamU = $joueurM->get_all_team($USER->get_id());
 
 ?>
 <center>
