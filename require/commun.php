@@ -89,5 +89,8 @@ $jours = array("DIM","LUN","MAR","MER","JEU","VEN","SAM");
 function usdatetotime($usdate){
     return preg_replace("/[0-9]{4}-[0-9]{2}-[0-9]{2} ([0-9]{2}):([0-9]{2}):[0-9]{2}/", "$1h$2", $usdate);
 }
+function usdatetotimeus($usdate){
+    return preg_replace("/[0-9]{4}-[0-9]{2}-[0-9]{2} ([0-9]{2}):([0-9]{2}):[0-9]{2}/", "$1:$2", $usdate);
+}
 
 ?>

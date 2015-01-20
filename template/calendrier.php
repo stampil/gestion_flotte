@@ -2,7 +2,7 @@
 $date_deb = date("Y-m-d");
 $date_fin = date("Y-m-d",  strtotime(" +14 day"));
 $sortieM = new SortieManager($bdd);
-$sorties  = $sortieM->get_range_sortie($date_deb, $date_fin);
+$sorties  = $sortieM->get_range_sortie($date_deb." :00:00:00", $date_fin." :23:59:59");
 
 ?>
 <table class="calendrier" align="center">
@@ -19,13 +19,18 @@ $sorties  = $sortieM->get_range_sortie($date_deb, $date_fin);
                 echo '<td class="jour_'.$i.'">';
                 $date =date("Y-m-d",  strtotime(" +$i day"));
                 $html="";
+                
                 foreach ($sorties as $value) {
                     $sortie = new Sortie($sortieM->get_sortie($value->id_sortie));
-                    
+                    $ok = false;
                     //TEST VISIB TEAM
                     if($sortie->get_visibilite() == SORTIE_VISIBILITE_TEAM ){  
+                        if(!$USER){//pas connecté, on ne traite pas cette sortie
+                            continue;
+                        }
+                        
                         $teams = $USER->get_all_team();
-                        $ok = false;
+                        
                         foreach ($teams as $team) {
                             if($team->id_team == $sortie->get_organisateur()->get_team()->get_id()){
                                 $ok =true;
@@ -38,8 +43,11 @@ $sorties  = $sortieM->get_range_sortie($date_deb, $date_fin);
                     
                     //TEST VISIB TEAM + ALLI
                     if($sortie->get_visibilite() == SORTIE_VISIBILITE_TEAM_ALLIE){
+                        if(!$USER){//pas connecté, on ne traite pas cette sortie
+                            continue;
+                        }
                         $teams = $USER->get_all_team();
-                        $ok = false;
+
                         foreach ($teams as $team) {
                             if($team->id_team == $sortie->get_organisateur()->get_team()->get_id()){
                                 $ok =true;
@@ -66,7 +74,7 @@ $sorties  = $sortieM->get_range_sortie($date_deb, $date_fin);
                     }
                     //ALL TEST PASSED : DISPLAY
                     if(preg_match("/$date/", $value->debut)){
-                        $html.= '<a href="?action=voir_sortie&sortie='.$sortie->get_id().'">'.usdatetotime($sortie->get_debut()).'&nbsp;:<br /><img src="upload/team/'.$sortie->get_organisateur()->get_team()->get_logo().'" class="logoMini" title="De '.usdatetotime($sortie->get_debut()).' à '.usdatetotime($sortie->get_fin()).' cliquer pour les details"></a><br />'.ucfirst($sortie->get_fin()).'<br /><a href="'.$sortie->get_teamspeak()->get_url().'">TS</a><hr />';
+                        $html.= '<a href="?action=voir_sortie&sortie='.$sortie->get_id().'">'.usdatetotime($sortie->get_debut()).'&nbsp;:<br /><img src="upload/team/'.$sortie->get_organisateur()->get_team()->get_logo().'" class="logoMini" title="De '.usdatetotime($sortie->get_debut()).' à '.usdatetotime($sortie->get_fin()).' cliquer pour les details"></a><br />'.ucfirst($sortie->get_titre()).'<br /><a href="'.$sortie->get_teamspeak()->get_url().'">TS</a><hr />';
                     }
                 }
                 $html = substr($html, 0,-6);

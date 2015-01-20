@@ -14,11 +14,19 @@ class TeamspeakManager {
     
    
     
-    public function get_teamspeak(){
+    public function get_teamspeak($id_teamspeak){
         $query="SELECT id_teamspeak, url, label
-                FROM ".MyPDO::DB_FLAG."teamspeak"; 
-        $ret = $this->bdd->query($query);
+                FROM ".MyPDO::DB_FLAG."teamspeak
+                WHERE id_teamspeak=?"; 
+        $ret = $this->bdd->query($query,$id_teamspeak);
         return $ret[0];
+    }
+    
+        public function get_all_teamspeak(){
+        $query="SELECT id_teamspeak, url, label
+                FROM ".MyPDO::DB_FLAG."teamspeak
+               "; 
+        return $this->bdd->query($query);
     }
     
     

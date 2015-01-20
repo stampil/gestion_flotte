@@ -6,7 +6,7 @@ $d = $_GET['date'];
 $date = $jours[date("w",  strtotime(" +$d day"))].' '.date("d/m",  strtotime(" +$d day"));
 
 $teamspeakM = new TeamspeakManager($bdd);
-$teamspeak = $teamspeakM->get_teamspeak();
+$teamspeak = $teamspeakM->get_all_teamspeak();
 
 ?>
 <p>Ajouter une sortie</p>
@@ -32,7 +32,9 @@ $teamspeak = $teamspeakM->get_teamspeak();
         <td>Teamspeak</td>
         <td><select name="id_teamspeak">
             <?php
+            
              foreach ($teamspeak as $o) {
+
                  echo '<option value="'.$o->id_teamspeak.'">'.$o->label.'</option>';
              }
             ?>
