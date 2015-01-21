@@ -57,7 +57,8 @@ $joueur= $teamM->get_membre($teams[0]->id_team);
     }
     ?>
 </table>
-    
+</div>
+<div class="content">
     
     <table class="table">
         <tr>
