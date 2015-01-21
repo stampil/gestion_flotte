@@ -74,7 +74,7 @@ $sorties  = $sortieM->get_range_sortie($date_deb." :00:00:00", $date_fin." :23:5
                     }
                     //ALL TEST PASSED : DISPLAY
                     if(preg_match("/$date/", $value->debut)){
-                        $html.= '<a href="?action=voir_sortie&sortie='.$sortie->get_id().'">'.usdatetotime($sortie->get_debut()).'&nbsp;:<br /><img src="upload/team/'.$sortie->get_organisateur()->get_team()->get_logo().'" class="logoMini" title="De '.usdatetotime($sortie->get_debut()).' à '.usdatetotime($sortie->get_fin()).' cliquer pour les details"></a><br />'.ucfirst($sortie->get_titre()).'<br /><a href="'.$sortie->get_teamspeak()->get_url().'">TS</a><hr />';
+                        $html.= '<a href="?action=voir_sortie&sortie='.$sortie->get_id().'">'.usdatetotime($sortie->get_debut()).'&nbsp;:<br /><img src="upload/team/'.$sortie->get_organisateur()->get_team()->get_logo().'" class="logoMini" title="De '.usdatetotime($sortie->get_debut()).' à '.usdatetotime($sortie->get_fin()).' cliquer pour les details"></a><br />'.ucfirst($sortie->get_titre()).'<br /><a href="'.$sortie->get_teamspeak()->get_url().'">TS</a> <a href="?action=voir_sortie&sortie='.$sortie->get_id().'">S\'inscrire</a><hr />';
                     }
                 }
                 $html = substr($html, 0,-6);

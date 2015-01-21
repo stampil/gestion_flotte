@@ -16,13 +16,13 @@ if(@$_GET["supp_ship"]){
 
 $last_joueur = $joueurM->get_all_joueur(50);
 $orientation = $orientationM->get_all_orientation();
-$orientationU = $joueurM->get_orientation($USER->get_id());
+$orientationU = $joueurM->get_orientation($USER->get_id()); //TODO passer par la classe joueur comme $USER->get_vaisseau();
 
 $vaisseau = $vaisseauM->get_all_vaisseau();
-$vaisseauU = $joueurM->get_vaisseau($USER->get_id());
+$vaisseauU = $USER->get_vaisseau();
 
 $team = $teamM->get_all_team();
-$teamU = $joueurM->get_all_team($USER->get_id());
+$teamU = $joueurM->get_all_team($USER->get_id());//TODO passer par la classe joueur comme $USER->get_vaisseau();
 
 ?>
 <center>

@@ -7,7 +7,7 @@ $menu_actif='actif';
 
 <table width="440" border="0" align="center" cellpadding="0" cellspacing="0">
                     <tr>
-                        <td><div align="center" class="menu <?php if($action=='accueil') echo $menu_actif ?>" action=accueil><a href="?action=accueil">accueil</a></div></td>
+                        <td><div align="center" class="menu <?php if($action=='accueil') echo $menu_actif ?>" action=accueil><a href="?action=accueil">Accueil</a></div></td>
                         <td></td>
                         
                         <?php 

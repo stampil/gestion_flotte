@@ -36,4 +36,21 @@ class SortieManager {
         $this->bdd->query($query,$s->get_id_organisateur(), $s->get_id_teamspeak(), $s->get_titre(), $s->get_detail(), $s->get_debut(), $s->get_fin(), $s->get_visibilite());
     }
     
+    public function update_sortie( Sortie $s){
+        $query ="UPDATE ".MyPDO::DB_FLAG."sortie set id_teamspeak=?, titre=?, detail=?, debut=?, fin=?, visibilite=? WHERE id_sortie=?";
+        $this->bdd->query($query,$s->get_id_teamspeak(), $s->get_titre(), $s->get_detail(), $s->get_debut(), $s->get_fin(), $s->get_visibilite(), $s->get_id());
+    }
+    
+    public function delete_sortie( $id_sortie){
+        $query ="DELETE FROM ".MyPDO::DB_FLAG."sortie  WHERE id_sortie=?";
+        $this->bdd->query($query,  $id_sortie);
+    }
+    
+    public function get_participant($id_sortie){
+        $query="SELECT js.id_joueur, js.id_jv, jpv.nom, js.commentaire, jpv.id_vaisseau  FROM `".MyPDO::DB_FLAG."joueur_sortie` js
+        LEFT JOIN ".MyPDO::DB_FLAG."joueur_possede_vaisseau jpv ON jpv.id_jv = js.id_jv
+        WHERE id_sortie=?"; 
+        return $this->bdd->query($query,$id_sortie);
+    }
+    
 }

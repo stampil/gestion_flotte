@@ -16,7 +16,8 @@ class VaisseauManager {
         $query="SELECT id_vaisseau, nom, img, focus, cargo, autonomie, coutReparation, nbEquipage, id_constructeur 
                 FROM ".MyPDO::DB_FLAG."vaisseau
                 WHERE id_vaisseau=? "; 
-        return $this->bdd->query($query,$id);
+        $ret = $this->bdd->query($query,$id);
+        return $ret[0];
     }
     
     public function get_all_vaisseau($limit = null){

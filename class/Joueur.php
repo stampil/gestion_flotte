@@ -12,6 +12,7 @@ class Joueur {
     private $list_team;
     private $list_alliance;
     private $admin;
+    private $vaisseau;
     
     public function __construct($jm=null) {
         if($jm){
@@ -118,6 +119,14 @@ class Joueur {
         $url_check = "https://robertsspaceindustries.com/citizens/".$handle;
         $headers = get_headers($url_check, 1);  
         return preg_match("/200/", $headers[0]);
+    }
+    
+    public function get_vaisseau(){
+        if(!$this->vaisseau){
+            $teamM = new JoueurManager();
+            $this->vaisseau = $teamM->get_vaisseau($this->id_joueur);
+        }
+        return $this->vaisseau;
     }
     
 
