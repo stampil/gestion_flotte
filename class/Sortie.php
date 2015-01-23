@@ -12,6 +12,8 @@ class Sortie {
     private $visibilite;
     private $Joueur;
     private $Teamspeak;
+    private $creato;
+    private $modifo;
 
 
 
@@ -27,6 +29,8 @@ class Sortie {
             $this->set_visibilite($o->visibilite);
             $this->set_organisateur($o->id_joueur);
             $this->set_teamspeak($o->id_teamspeak);
+            $this->set_creato($o->creato);
+            $this->set_modifo($o->modifo);
         }
     }
     
@@ -36,6 +40,22 @@ class Sortie {
     
     public function set_id($id){
         $this->id = $id;
+    }
+    
+    public function get_creato(){
+        return $this->creato;
+    }
+    
+    public function set_creato($creato){
+        $this->creato = $creato;
+    }
+    
+    public function get_modifo(){
+        return $this->modifo;
+    }
+    
+    public function set_modifo($modifo){
+        $this->modifo = $modifo;
     }
     
     public function get_id_organisateur(){

@@ -21,7 +21,7 @@ class SortieManager {
     }
     
     public function get_sortie($id_sortie){
-        $query="SELECT s.id_sortie, s.titre, s.detail, s.debut, s.fin, s.id_teamspeak, s.visibilite, j.id_joueur, j.handle, t.nom, t.logo as logoTeam
+        $query="SELECT s.id_sortie, s.titre, s.detail, s.debut, s.fin, s.id_teamspeak, s.visibilite, s.creato, s.modifo, j.id_joueur, j.handle, t.nom, t.logo as logoTeam
                 FROM ".MyPDO::DB_FLAG."sortie s
                 JOIN ".MyPDO::DB_FLAG."joueur j ON s.id_organisateur=j.id_joueur
                 JOIN ".MyPDO::DB_FLAG."joueur_dans_team jdt ON jdt.id_joueur=j.id_joueur and principal=1
@@ -32,12 +32,12 @@ class SortieManager {
     }
     
     public function set_sortie( Sortie $s){
-        $query ="INSERT INTO ".MyPDO::DB_FLAG."sortie (id_organisateur,id_teamspeak, titre, detail, debut, fin, visibilite) VALUE(?,?,?,?,?,?,?)";
+        $query ="INSERT INTO ".MyPDO::DB_FLAG."sortie (id_organisateur,id_teamspeak, titre, detail, debut, fin, visibilite, creato) VALUE(?,?,?,?,?,?,?,now())";
         $this->bdd->query($query,$s->get_id_organisateur(), $s->get_id_teamspeak(), $s->get_titre(), $s->get_detail(), $s->get_debut(), $s->get_fin(), $s->get_visibilite());
     }
     
     public function update_sortie( Sortie $s){
-        $query ="UPDATE ".MyPDO::DB_FLAG."sortie set id_teamspeak=?, titre=?, detail=?, debut=?, fin=?, visibilite=? WHERE id_sortie=?";
+        $query ="UPDATE ".MyPDO::DB_FLAG."sortie set id_teamspeak=?, titre=?, detail=?, debut=?, fin=?, visibilite=?, modifo=now() WHERE id_sortie=?";
         $this->bdd->query($query,$s->get_id_teamspeak(), $s->get_titre(), $s->get_detail(), $s->get_debut(), $s->get_fin(), $s->get_visibilite(), $s->get_id());
     }
     

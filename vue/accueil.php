@@ -10,6 +10,7 @@ include_once 'template/calendrier.php';
 $teamM = new TeamManager($bdd);
 $team = $teamM->get_all_team();
 ?>
+<center><a href="ics.php?download">exporter au format calendrier</a> <a href="ics.php" target="_blanc" >afficher url </a><center>
 </div>
 
 <div class="content">
