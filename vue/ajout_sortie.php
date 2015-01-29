@@ -8,6 +8,8 @@ $date = $jours[date("w",  strtotime(" +$d day"))].' '.date("d/m",  strtotime(" +
 $teamspeakM = new TeamspeakManager($bdd);
 $teamspeak = $teamspeakM->get_all_teamspeak();
 
+$vaisseau = $USER->get_vaisseau();
+
 ?>
 <p>Ajouter une sortie</p>
 
@@ -23,10 +25,7 @@ $teamspeak = $teamspeakM->get_all_teamspeak();
     </tr>
     <tr>
         <td>Organisateur</td>
-        <td><input type="text" readonly="readonly" value="[<?php
-
-		echo $USER->get_team()->get_tag().'] '.$USER->get_handle();
-					?>" /></td>
+        <td><input type="text" readonly="readonly" value="<?php echo ($USER->get_team()?'['.$USER->get_team()->get_tag().']':'').' '.$USER->get_handle(); ?>" /></td>
     </tr>
     <tr>
         <td>Teamspeak</td>
@@ -56,12 +55,33 @@ $teamspeak = $teamspeakM->get_all_teamspeak();
     <tr>
         <td>Inscription possible par</td>
         <td><select name="visibilite">
-                <option value="<?php echo SORTIE_VISIBILITE_TEAM; ?>">Team seulement</option>
-                <option value="<?php echo SORTIE_VISIBILITE_TEAM_ALLIE; ?>">Team + Alliés</option>
+                <?php
+                if($USER->get_team()){
+                    ?>
+                           <option value="<?php echo SORTIE_VISIBILITE_TEAM; ?>">Team seulement</option>
+                <option value="<?php echo SORTIE_VISIBILITE_TEAM_ALLIE; ?>">Team + Alliés</option>     
+                <?php
+                }
+                ?>
+
                 <option value="<?php echo SORTIE_VISIBILITE_TOUS; ?>">N'importe qui</option>
             </select></td>
     </tr>
-    
+    <tr>
+        <td title="(0: aucune limite)">Max joueur </td>
+        <td title="(0: aucune limite)"><input name="max_joueur" min="2" max="100" type="number"  value="8" class="numberTiny" /></td>
+    </tr>
+    <tr>
+            <td>Votre vaisseau :</td>
+        <td><select name="id_jv">
+                <?php
+                foreach ($vaisseau as $o) {
+                    
+                    echo '<option value="'.$o->id_jv.'">'.$o->type.' ('.$o->nom.')</option>';
+                }
+                ?>
+                </select></td>
+        </tr>
         <tr>
             <td colspan="2"><input type="submit" /></td>
     </tr>

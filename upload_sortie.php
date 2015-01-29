@@ -17,7 +17,6 @@ if ($_GET["fin"] <= $_GET["debut"]) {
     $fin = $_GET["date"] . " " . $_GET["fin"] . ":00";
 }
 
-
 $sortie = new Sortie((object) array(
             "titre" => $_GET["titre"],
             "detail" => $_GET["detail"],
@@ -26,14 +25,21 @@ $sortie = new Sortie((object) array(
             "id_teamspeak" => $_GET["id_teamspeak"],
             "debut" => $debut,
             "fin" => $fin,
+            "creato" =>null,
+            "modifo" =>null,
+            "max_joueur"=> $_GET["max_joueur"],
             "visibilite" => $_GET["visibilite"]
         ));
 
-if ($_GET["id_sortie"]) {
+if (@$_GET["id_sortie"]) {
 
     $sortieM->update_sortie($sortie);
 } else {
-    $sortieM->set_sortie($sortie);
+    $id_sortie = $sortieM->set_sortie($sortie);
+    $joueurM = new JoueurManager($bdd);  
+    $id_jv = $_GET["id_jv"];
+    $joueurM->set_sortie($id_sortie, $USER->get_id(), $id_jv, 'Organisateur');
+
 }
 
 

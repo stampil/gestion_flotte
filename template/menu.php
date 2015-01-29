@@ -19,14 +19,21 @@ $menu_actif='actif';
                         <td></td>
                         <td></td>
                              <?php }
+                             if(is_connected() && $USER->get_team()){
+                                 ?>
+                        <td><div align="center" class="menu  <?php if($action=='voir_team') echo $menu_actif ?>" action=voir_team><a href="?action=voir_team">Info Team</a></div></td>
+                        <td></td>    
+                        <td><div align="center" class="menu  <?php if($action=='voir_groupe_alliance') echo $menu_actif ?>" action=voir_groupe_alliance><a href="?action=voir_groupe_alliance">Info Gr Alliance</a></div></td>
+
+                        <?php
+                             }
                             if(is_connected()){
                         ?>
                         
                         <td><div align="center" class="menu  <?php if($action=='modif_joueur') echo $menu_actif ?>" action=modif_joueur><a href="?action=modif_joueur">Modif infos</a></div></td>
                         <td></td>    
-                        <td><div align="center" class="menu  <?php if($action=='voir_team') echo $menu_actif ?>" action=voir_team><a href="?action=voir_team">Info Team</a></div></td>
-                        <td></td>    
-                        <td><div align="center" class="menu  <?php if($action=='voir_groupe_alliance') echo $menu_actif ?>" action=voir_groupe_alliance><a href="?action=voir_groupe_alliance">Info Gr Alliance</a></div></td>
+                        
+                                                
                         <td><div align="center" class="menu" <?php if($action=='connexion') echo $menu_actif ?> action=connexion><a href="?action=connexion">Deconnexion</a></div></td>
 
                             <?php }else{ ?>

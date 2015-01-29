@@ -74,7 +74,7 @@ $team = $teamM->get_all_team();
                 <td colspan='2'>
                     <p>Vaisseaux:</p>
                        
-                        <table class="table">
+                       
                         <?php
                         for ($i = 0; $i < count($vaisseau); $i++) {
                             echo '<div class="container_vaisseauMedium">'
@@ -85,7 +85,7 @@ $team = $teamM->get_all_team();
                             . '</div>';
                         }
                         ?>
-                        </table>
+                      
                         
   
                 </td>
@@ -100,12 +100,12 @@ $team = $teamM->get_all_team();
 
     </form>
 
-    <div> <?php echo min(count($last_joueur),50); ?> Derniers joueurs ajoutés :</div>
+    <div> <?php echo min(count($last_joueur),5); ?> Derniers joueurs ajoutés :</div>
     
     <?php
     
-    for($i=0; $i<count($last_joueur);$i++){
-        echo '<a href="https://robertsspaceindustries.com/citizens/'.$last_joueur[$i]->handle.'" target="_blank"><img src="http://vps36292.ovh.net/mordu/t/'.$last_joueur[$i]->tag.'/'.$last_joueur[$i]->handle.'.png" /></a>';
+    for($i=0; $i<min(count($last_joueur),5);$i++){
+        echo '<a href="https://robertsspaceindustries.com/citizens/'.$last_joueur[$i]->handle.'" target="_blank">'.$last_joueur[$i]->handle.'</a> ';
     }
     ?>
 </center> 

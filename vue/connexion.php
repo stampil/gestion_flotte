@@ -13,7 +13,7 @@ if(is_connected()){
                 <td>Bienvenue <?php echo  $USER->get_handle() ?></td>  
             </tr>
             <tr>
-                <td><a href="https://robertsspaceindustries.com/citizens/<?php echo  $USER->get_handle() ?>" target="_blank"><img src="http://vps36292.ovh.net/mordu/t/<?php  echo$USER->get_team()->get_tag() ?>/<?php echo  $USER->get_handle() ?>.png" /></a></td>
+                <td><a href="https://robertsspaceindustries.com/citizens/<?php echo  $USER->get_handle() ?>" target="_blank"><?php if($USER->get_team()){ ?><img src="http://vps36292.ovh.net/mordu/t/<?php  echo $USER->get_team()->get_tag() ?>/<?php echo  $USER->get_handle() ?>.png" /><?php } ?></a></td>
             </tr>
             <tr>
                 <td colspan="2" align="center"><input type="submit" value="se deco"></td>      

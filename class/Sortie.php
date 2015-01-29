@@ -11,6 +11,7 @@ class Sortie {
     private $id_teamspeak;
     private $visibilite;
     private $Joueur;
+    private $max_joueur;
     private $Teamspeak;
     private $creato;
     private $modifo;
@@ -31,6 +32,7 @@ class Sortie {
             $this->set_teamspeak($o->id_teamspeak);
             $this->set_creato($o->creato);
             $this->set_modifo($o->modifo);
+            $this->set_max_joueur($o->max_joueur);
         }
     }
     
@@ -40,6 +42,14 @@ class Sortie {
     
     public function set_id($id){
         $this->id = $id;
+    }
+    
+    public function get_max_joueur(){
+        return $this->max_joueur;
+    }
+    
+    public function set_max_joueur($max_joueur){
+        $this->max_joueur = $max_joueur;
     }
     
     public function get_creato(){

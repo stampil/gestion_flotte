@@ -22,11 +22,24 @@ $vaisseau = $USER->get_vaisseau();
 $joueurM = new JoueurManager($bdd);
 $vaisseauM = new VaisseauManager($bdd);
 
+$participants = $sortieM->get_participant($id_sortie);
+$present = array();
+foreach ($participants as $participant) {
+    if($participant->id_jv){
+        array_push($present, $participant->id_joueur);
+    }
+
+}
+$nb_present = count($present);
+
+
 ?>
-<p>Info participation :</p>
+<p>Info participation : <?php echo $nb_present.($sortie->get_max_joueur()?'/'.$sortie->get_max_joueur():'').' participant'.($nb_present>1?'s':''); ?></p>
 <form action="inscrire_sortie.php" method="GET">
     <input type="hidden" name="id_sortie" value="<?php echo $id_sortie; ?>" />
     <table>
+        <?php 
+        if(!$sortie->get_max_joueur() || $nb_present<$sortie->get_max_joueur() ||  in_array($USER->get_id(), $present)  ){?>
         <tr>
             <td><input type="radio" name="presence" value="1" checked="checked"/> Je viendrai avec mon </td>
         <td><select name="id_jv">
@@ -38,6 +51,7 @@ $vaisseauM = new VaisseauManager($bdd);
                 ?>
                 </select></td>
         </tr>
+        <?php } ?>
         <tr>
             <td colspan="2"><input type="radio" name="presence" value="0" /> Je ne pourrais pas participer.</td>
         </tr>
@@ -64,10 +78,7 @@ $vaisseauM = new VaisseauManager($bdd);
     </tr>
     <tr>
         <td>Organisateur</td>
-        <td><input type="text"  disabled="disabled"  value="[<?php
-
-		echo $sortie->get_organisateur()->get_team()->get_tag().'] '.$sortie->get_organisateur()->get_handle();
-					?>" /></td>
+        <td><input type="text"  disabled="disabled" value="<?php echo ($sortie->get_organisateur()->get_team()? '['.$sortie->get_organisateur()->get_team()->get_tag().']':'').' '.$sortie->get_organisateur()->get_handle(); ?>" /></td>
     </tr>
     <tr>
         <td>Teamspeak</td>
@@ -83,7 +94,7 @@ $vaisseauM = new VaisseauManager($bdd);
     </tr>
     <tr>
         <td>Date</td>
-        <td><input  type="text" disabled="disabled"  <?php echo ($organisateur?'':'readonly="readonly"') ?> value="<?php echo $jours[date("w",  strtotime($sortie->get_debut()))]." ".date("d/m",  strtotime($sortie->get_debut())); ?>" />
+        <td><input  type="text" disabled="disabled"  value="<?php echo $jours[date("w",  strtotime($sortie->get_debut()))]." ".date("d/m",  strtotime($sortie->get_debut())); ?>" />
         <input type="hidden" name="date"  value="<?php echo date("Y-m-d",  strtotime($sortie->get_debut())); ?>" /></td>
     </tr>
     <tr>
@@ -102,7 +113,10 @@ $vaisseauM = new VaisseauManager($bdd);
                 <option value="<?php echo SORTIE_VISIBILITE_TOUS; ?>" <?php if($sortie->get_visibilite()==SORTIE_VISIBILITE_TOUS) echo 'selected="selected"' ?>>N'importe qui</option>
             </select></td>
     </tr>
-    
+    <tr>
+        <td title="(0: aucune limite)">Max joueur</td>
+        <td title="(0: aucune limite)"><input name="max_joueur" <?php echo ($organisateur?'':'disabled="disabled"') ?> type="number" min="2" max="100" class="numberTiny" value="<?php echo $sortie->get_max_joueur(); ?>" /></td>
+    </tr>
         <tr>
             <td colspan="2"> <?php if ($organisateur){
                 echo '<input type="submit" value="modifier" /> <input type="button" value="annuler la sortie" onclick="annule_sortie('.$id_sortie.')" />';
@@ -116,7 +130,7 @@ $vaisseauM = new VaisseauManager($bdd);
 <div class="content">
 <p>Participant :</p><hr />
 <?php
-$participants = $sortieM->get_participant($id_sortie);
+
 foreach ($participants as $participant) {
     if(!$participant->id_jv){
         continue;
@@ -124,7 +138,7 @@ foreach ($participants as $participant) {
     $joueur = new Joueur($joueurM->get_joueur($participant->id_joueur));
     $vaisseau = new Vaisseau($vaisseauM->get_vaisseau($participant->id_vaisseau));
 
-    echo '['.$joueur->get_team()->get_tag().'] '.$joueur->get_handle()." avec ".$vaisseau->get_nom(). ' ('.$participant->nom.')'.($participant->commentaire?':':'').'<br />'.$participant->commentaire.'<hr />';
+    echo ($joueur->get_team()?'['.$joueur->get_team()->get_tag().']':'').' '.$joueur->get_handle()." avec ".$vaisseau->get_nom(). ' ('.$participant->nom.')'.($participant->commentaire?':':'').'<br />'.$participant->commentaire.'<hr />';
     
 }
 

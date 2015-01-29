@@ -48,7 +48,10 @@ class Joueur {
             $teamM = new JoueurManager();
             $this->team = $teamM->get_team($this->id_joueur);
         }
-        return new Team($this->team[0]);
+        if(@$this->team[0]){
+            return new Team($this->team[0]);
+        }
+        return false;
     }
     
     public function set_id($id_joueur){

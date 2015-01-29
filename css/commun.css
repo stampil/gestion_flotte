@@ -146,3 +146,20 @@ a:hover{
 .alignRight{
     text-align:right !important;
 }
+.info_present{
+    font-size: 9pt;
+position: relative;
+left: -23px;
+background: whitesmoke;
+border: 1px solid gray;
+padding: 2px 1px 0px 1px;
+border-radius: 5px;
+}
+
+.calendar_title{
+    min-width: 77px;
+}
+
+.jour_calendrier{
+    font-size:9pt;
+}
