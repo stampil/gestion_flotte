@@ -1,6 +1,3 @@
-
-
-
 <?php
 if(is_connected()){
 
@@ -33,7 +30,7 @@ else{
         <table class="tableform">
             <tr>
                 <td>Email :</td>
-                <td><input type="email" name="email" required></td>      
+                <td><input type="email" name="email" id="email" value="<?php echo @$_POST["email"] ?>" required></td>      
             </tr>
             <tr>
                 <td>Mot de passe :</td>
@@ -43,8 +40,16 @@ else{
                 <td colspan="2" align="center"><input type="submit" value="ok"></td>      
             </tr>
         </table>
+        <div id="mdp_oublie">Mot de passe oublié?</div>
 
     </form>
 </center> 
+<div id="dialog" title="récupération du mot de passe">
+    <form method="post" action="mdp_oublie.php">
+  <p>Veuillez entrer votre email et un nouveau mot de passe généré vous sera envoyé</p>
+  <input type="email" name="email_oublie_mdp"  value="<?php echo @$_POST["email"] ?>" id="email_oublie_mdp" required>
+  <input type="submit" value="envoyer" />
+    </form>
+</div>
 
 <?php } ?>

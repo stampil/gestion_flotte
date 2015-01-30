@@ -163,3 +163,12 @@ border-radius: 5px;
 .jour_calendrier{
     font-size:9pt;
 }
+
+#mdp_oublie{
+    text-decoration: underline;
+    cursor:pointer;
+}
+
+#dialog{
+    display: none;
+}

@@ -213,5 +213,20 @@ class JoueurManager {
                 )";
         return $this->bdd->query($query,$id_joueur);
     }
+    
+    public function is_email_in_bdd($email){
+        $query = "SELECT id_joueur
+            FROM ".MyPDO::DB_FLAG."joueur
+            WHERE email=?    ";
+        $ret = $this->bdd->query($query,$email);
+        return ( isset($ret[0]->id_joueur) && $ret[0]->id_joueur>0 );
+    }
+    
+    public function change_mdp($mdp,$email){
+        $query = "UPDATE ".MyPDO::DB_FLAG."joueur
+            SET mdp=?
+            WHERE email=?    ";
+        $this->bdd->query($query,$mdp,$email);
+    }
 }
 ?>
