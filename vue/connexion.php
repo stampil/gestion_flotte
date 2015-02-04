@@ -43,6 +43,8 @@ else{
         <div id="mdp_oublie">Mot de passe oublié?</div>
 
     </form>
+    <p>Des problemes de connection? <br />
+    <a href="http://vps36292.ovh.net/mordu/robertsspaceindustriesfr/" target="_blank">consulter ce site ici.</a>
 </center> 
 <div id="dialog" title="récupération du mot de passe">
     <form method="post" action="mdp_oublie.php">
