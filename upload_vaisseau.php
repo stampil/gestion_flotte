@@ -13,7 +13,8 @@ $vaisseau = new Vaisseau( (object) array(
 "autonomie"=>$_POST["autonomie"], 
 "coutReparation"=>$_POST["coutReparation"],
 "nbEquipage"=>$_POST["nbEquipage"],
-"img"=>$img
+"img"=>$img,
+    "categorie"=>$_POST["cargo"]
 ));
 
 if (!$uploadErr) {

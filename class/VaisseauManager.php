@@ -13,15 +13,15 @@ class VaisseauManager {
     }
     
     public function get_vaisseau($id){
-        $query="SELECT id_vaisseau, nom, img, focus, cargo, autonomie, coutReparation, nbEquipage, id_constructeur 
+        $query="SELECT id_vaisseau, nom, img, categorie, focus, cargo, autonomie, coutReparation, nbEquipage, id_constructeur 
                 FROM ".MyPDO::DB_FLAG."vaisseau
                 WHERE id_vaisseau=? "; 
         $ret = $this->bdd->query($query,$id);
-        return $ret[0];
+        return @$ret[0];
     }
     
     public function get_all_vaisseau($limit = null){
-        $query="SELECT id_vaisseau, nom, img, focus, cargo, autonomie, coutReparation, nbEquipage, id_constructeur  
+        $query="SELECT id_vaisseau, nom, img, categorie, focus, cargo, autonomie, coutReparation, nbEquipage, id_constructeur  
                 FROM ".MyPDO::DB_FLAG."vaisseau
                 order by nom "; 
         if(is_int($limit)){
@@ -31,9 +31,9 @@ class VaisseauManager {
     }
     
     public function set_vaisseau( Vaisseau $o){
-        $query="INSERT INTO ".MyPDO::DB_FLAG."vaisseau (nom, img, focus, cargo, autonomie, coutReparation, nbEquipage, id_constructeur)
-                VALUES(?,?,?,?,?,?,?,?)";
-        $this->bdd->query($query,$o->get_nom(), $o->get_img(), $o->get_focus(), $o->get_cargo(), $o->get_autonomie(), $o->get_coutReparation(), $o->get_nbEquipage(), $o->get_constructeur()->get_id());
+        $query="INSERT INTO ".MyPDO::DB_FLAG."vaisseau (nom, img, categorie, focus, cargo, autonomie, coutReparation, nbEquipage, id_constructeur)
+                VALUES(?,?,?,?,?,?,?,?,?)";
+        $this->bdd->query($query,$o->get_nom(), $o->get_img(), $o->get_categorie(), $o->get_focus(), $o->get_cargo(), $o->get_autonomie(), $o->get_coutReparation(), $o->get_nbEquipage(), $o->get_constructeur()->get_id());
     }
 }
 ?>

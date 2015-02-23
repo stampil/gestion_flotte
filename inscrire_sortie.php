@@ -15,7 +15,7 @@ else{
         $id_jv=0;
     }
 
-    $joueurM->set_sortie($_GET["id_sortie"], $USER->get_id(), $id_jv, $_GET["commentaire"]);
+    $joueurM->set_sortie($_GET["id_sortie"], $USER->get_id(), $id_jv, $_GET["role"], $_GET["commentaire"]);
 
 }
 if (!$uploadErr) {

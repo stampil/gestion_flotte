@@ -165,10 +165,10 @@ class JoueurManager {
         $this->bdd->query($query,$vaisseau->nom,$vaisseau->LTI, $id_joueur,$vaisseau->id_vaisseau);    
     }
     
-    public function set_sortie($id_sortie, $id_joueur, $id_jv,  $comment){
-        $query = "INSERT INTO ".MyPDO::DB_FLAG."joueur_sortie (id_sortie, id_joueur,  id_jv, commentaire) VALUES(?,?,?,?)"
-                . "ON DUPLICATE KEY UPDATE id_jv=?, commentaire=?";
-        $this->bdd->query($query, $id_sortie, $id_joueur, $id_jv,  $comment, $id_jv,  $comment);
+    public function set_sortie($id_sortie, $id_joueur, $id_jv, $role,  $comment){
+        $query = "INSERT INTO ".MyPDO::DB_FLAG."joueur_sortie (id_sortie, id_joueur,  id_jv, role, commentaire) VALUES(?,?,?,?,?)"
+                . "ON DUPLICATE KEY UPDATE id_jv=?, role=?, commentaire=?";
+        $this->bdd->query($query, $id_sortie, $id_joueur, $id_jv, $role,  $comment, $id_jv, $role,  $comment);
     }
     
     public function update_vaisseau($id_joueur, $vaisseau){

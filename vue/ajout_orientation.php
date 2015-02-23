@@ -1,6 +1,6 @@
 <?php
 include_once 'template/menu.php';
-if(!is_connected()) exit("veuillez vous (re)connectez");
+if (!is_connected()){     header("Location: ?action=connexion");     exit("veuillez vous (re)connectez"); }
 $orientationM = new OrientationManager($bdd);
 $orientation = $orientationM->get_all_orientation();
 ?>

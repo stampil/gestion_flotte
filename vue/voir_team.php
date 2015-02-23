@@ -1,6 +1,6 @@
 <?php
 include_once 'template/menu.php';
-if(!is_connected()) exit("veuillez vous (re)connectez");
+if (!is_connected()){     header("Location: ?action=connexion");     exit("veuillez vous (re)connectez"); }
 
 $joueurM = new JoueurManager($bdd);
 $teamM = new TeamManager($bdd);

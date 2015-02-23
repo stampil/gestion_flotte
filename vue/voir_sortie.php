@@ -1,5 +1,5 @@
 <?php
-if(!is_connected()) exit("veuillez vous (re)connectez");
+if (!is_connected()){     header("Location: ?action=connexion");     exit("veuillez vous (re)connectez"); }
 
 $id_sortie = $_GET['sortie'];
 
@@ -49,6 +49,18 @@ $nb_present = count($present);
                     echo '<option value="'.$o->id_jv.'">'.$o->type.' ('.$o->nom.')</option>';
                 }
                 ?>
+                </select></td>
+        </tr>
+        <tr>
+            <td>Role</td>
+                    <td>
+               <select name="role">
+                   <?php
+                   for ($i=0; $i<count($roles); $i++){
+                       echo '<option value="'.$i.'">'.$roles[$i].'</option>';
+                   }
+                   ?>
+                  
                 </select></td>
         </tr>
         <?php } ?>
@@ -128,7 +140,9 @@ $nb_present = count($present);
 </form>
 </div>
 <div class="content">
+    <p> <a href="?action=voir_plan_sortie&sortie=<?php echo $id_sortie; ?>">Plan de formation:</a>
 <p>Participant :</p><hr />
+
 <?php
 
 foreach ($participants as $participant) {
@@ -138,7 +152,7 @@ foreach ($participants as $participant) {
     $joueur = new Joueur($joueurM->get_joueur($participant->id_joueur));
     $vaisseau = new Vaisseau($vaisseauM->get_vaisseau($participant->id_vaisseau));
 
-    echo ($joueur->get_team()?'['.$joueur->get_team()->get_tag().']':'').' '.$joueur->get_handle()." avec ".$vaisseau->get_nom(). ' ('.$participant->nom.')'.($participant->commentaire?':':'').'<br />'.$participant->commentaire.'<hr />';
+    echo ($joueur->get_team()?'['.$joueur->get_team()->get_tag().']':'').' '.$joueur->get_handle()." avec ".$vaisseau->get_nom(). ' '.(!preg_match('/ship_.+/', $participant->nom)?'('.$participant->nom.')':'').' '.($participant->commentaire?':':'').'<br />Role : '.$roles[$participant->role].' <br />'.$participant->commentaire.'<hr />';
     
 }
 

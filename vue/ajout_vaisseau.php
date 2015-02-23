@@ -1,6 +1,6 @@
 <?php
 include_once 'template/menu.php';
-if(!is_connected()) exit("veuillez vous (re)connectez");
+if (!is_connected()){     header("Location: ?action=connexion");     exit("veuillez vous (re)connectez"); }
 $vaisseauM = new VaisseauManager($bdd);
 $last_vaisseau = $vaisseauM->get_all_vaisseau();
 $constructeurM = new ConstructeurManager($bdd);
@@ -32,6 +32,14 @@ $list_constructeur = $constructeurM->get_all_constructeur();
             <tr>
                 <td>Image :</td>
                 <td><input type="file"  name="img" id="avatar" required></td>      
+            </tr>
+            <tr>
+                <td>Categorie :</td>
+                <td><select name="categorie">
+                        <option value="0">Leger</option>
+                        <option value="1">Moyen</option>
+                        <option value="2">Lourd</option>
+                    </select></td>      
             </tr>
             <tr>
                 <td>Focus :</td>

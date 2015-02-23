@@ -49,9 +49,10 @@ class SortieManager {
     }
     
     public function get_participant($id_sortie){
-        $query="SELECT js.id_joueur, js.id_jv, jpv.nom, js.commentaire, jpv.id_vaisseau  FROM `".MyPDO::DB_FLAG."joueur_sortie` js
+        $query="SELECT js.id_joueur, js.id_jv, js.role, jpv.nom, v.categorie, js.commentaire, jpv.id_vaisseau  FROM `".MyPDO::DB_FLAG."joueur_sortie` js
         LEFT JOIN ".MyPDO::DB_FLAG."joueur_possede_vaisseau jpv ON jpv.id_jv = js.id_jv
-        WHERE id_sortie=?"; 
+        LEFT JOIN ".MyPDO::DB_FLAG."vaisseau v ON jpv.id_vaisseau = v.id_vaisseau
+        WHERE id_sortie=? order by v.categorie"; 
         return $this->bdd->query($query,$id_sortie);
     }
     

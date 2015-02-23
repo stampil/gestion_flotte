@@ -1,5 +1,5 @@
 <?php
-if(!is_connected()) exit("veuillez vous (re)connectez");
+if (!is_connected()){     header("Location: ?action=connexion");     exit("veuillez vous (re)connectez"); }
 
 $d = $_GET['date'];
 

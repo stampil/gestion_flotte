@@ -2,6 +2,7 @@
 class Vaisseau {
     private $nom;
     private $img;
+    private $categorie;
     private $focus;
     private $cargo;
     private $autonomie;
@@ -13,6 +14,7 @@ class Vaisseau {
         if($o){
             $this->set_nom($o->nom);
             $this->set_img($o->img);
+            $this->set_categorie($o->categorie);
             $this->set_focus($o->focus);
             $this->set_cargo($o->cargo);
             $this->set_autonomie($o->autonomie);
@@ -43,6 +45,13 @@ class Vaisseau {
     }
     public function set_img($img){
         $this->img = $img;
+    }
+    
+    public function get_categorie(){
+        return $this->categorie;
+    }
+    public function set_categorie($categorie){
+        $this->categorie = $categorie;
     }
     
     public function get_focus(){

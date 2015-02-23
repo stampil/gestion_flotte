@@ -10,6 +10,13 @@ define("SORTIE_VISIBILITE_TEAM",1);
 define("SORTIE_VISIBILITE_TEAM_ALLIE",2);
 define("SORTIE_VISIBILITE_TOUS",3);
 
+define("ROLE_DIVERS",0);
+define("ROLE_MEDICAL",1);
+define("ROLE_VIP",2);
+define("ROLE_COMBAT",3);
+define("ROLE_MARCHAND",4);
+$roles = array("Divers","Medical","VIP","Combat","Marchand");
+
 $bdd = new MyPDO();
 $crypt = new Crypt();
 
