@@ -170,7 +170,7 @@ foreach ($participants as $participant) {
     $joueur = new Joueur($joueurM->get_joueur($participant->id_joueur));
    
 
-    echo '['.$joueur->get_team()->get_tag().'] '.$joueur->get_handle()." ".($participant->commentaire?':':'').'<br />'.$participant->commentaire.'<hr />';
+    echo ($joueur->get_team()?'['.$joueur->get_team()->get_tag().']':'').' '.$joueur->get_handle()." ".($participant->commentaire?':':'').'<br />'.$participant->commentaire.'<hr />';
     
 }
 ?>

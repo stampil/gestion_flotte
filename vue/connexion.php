@@ -1,6 +1,5 @@
 <?php
 if(is_connected()){
-
 ?>
 <center>
     <form method="POST" action="?action=connexion">
@@ -52,5 +51,4 @@ else{
   <input type="submit" value="envoyer" />
     </form>
 </div>
-
 <?php } ?>
