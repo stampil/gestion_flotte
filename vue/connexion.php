@@ -15,17 +15,14 @@ if(is_connected()){
                 <td colspan="2" align="center"><input type="submit" value="se deco"></td>      
             </tr>
         </table>
-
     </form>
 </center> 
-
 <?php
 }
 else{
 ?>
 <center>
     <form method="POST" action="?action=connexion">
-
         <table class="tableform">
             <tr>
                 <td>Email :</td>
@@ -40,9 +37,7 @@ else{
             </tr>
         </table>
         <div id="mdp_oublie">Mot de passe oublié?</div>
-
     </form>
-
 </center> 
 <div id="dialog" title="récupération du mot de passe">
     <form method="post" action="mdp_oublie.php">

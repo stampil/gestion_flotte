@@ -2,7 +2,6 @@
 if (!is_connected()){     header("Location: ?action=connexion");     exit("veuillez vous (re)connectez"); }
 
 $id_sortie = $_GET['sortie'];
-
 $sortieM = new SortieManager();
 $sortie = new Sortie($sortieM->get_sortie($id_sortie));
 
@@ -13,15 +12,11 @@ else{
     $organisateur = false;
 }
     
-
 $teamspeakM = new TeamspeakManager($bdd);
 $teamspeak = $teamspeakM->get_all_teamspeak();
-
 $vaisseau = $USER->get_vaisseau();
-
 $joueurM = new JoueurManager($bdd);
 $vaisseauM = new VaisseauManager($bdd);
-
 $participants = $sortieM->get_participant($id_sortie);
 $present = array();
 foreach ($participants as $participant) {
@@ -31,8 +26,6 @@ foreach ($participants as $participant) {
 
 }
 $nb_present = count($present);
-
-
 ?>
 <p>Info participation : <?php echo $nb_present.($sortie->get_max_joueur()?'/'.$sortie->get_max_joueur():'').' participant'.($nb_present>1?'s':''); ?></p>
 <form action="inscrire_sortie.php" method="GET">
@@ -155,7 +148,6 @@ foreach ($participants as $participant) {
     echo ($joueur->get_team()?'['.$joueur->get_team()->get_tag().']':'').' '.$joueur->get_handle()." avec ".$vaisseau->get_nom(). ' '.(!preg_match('/ship_.+/', $participant->nom)?'('.$participant->nom.')':'').' '.($participant->commentaire?':':'').'<br />Role : '.$roles[$participant->role].' <br />'.$participant->commentaire.'<hr />';
     
 }
-
 ?>
 </div>
 <div class="content">
@@ -174,4 +166,3 @@ foreach ($participants as $participant) {
     
 }
 ?>
-

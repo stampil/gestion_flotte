@@ -5,7 +5,6 @@ if (!is_connected()){
 }
 
 $id_sortie = $_GET['sortie'];
-
 $sortieM = new SortieManager();
 $sortie = new Sortie($sortieM->get_sortie($id_sortie));
 
@@ -15,15 +14,11 @@ if ($sortie->get_id_organisateur() == $USER->get_id()) {
     $organisateur = false;
 }
 
-
 $teamspeakM = new TeamspeakManager($bdd);
 $teamspeak = $teamspeakM->get_all_teamspeak();
-
 $vaisseau = $USER->get_vaisseau();
-
 $joueurM = new JoueurManager($bdd);
 $vaisseauM = new VaisseauManager($bdd);
-
 $participants = $sortieM->get_participant($id_sortie);
 $present = array();
 $symboles = "";
@@ -32,8 +27,8 @@ $y = 90;
 $x2=900;
 $num = 1;
 $couleur = 0;
-
 $nb_present = 0;
+
 foreach ($participants as $participant) {
     if (!$participant->id_jv) {
         continue;
@@ -54,7 +49,6 @@ for ($i=0; $i<count($participants);$i++) {
     }
 
 }
-
 
 foreach ($participants as $participant) {
     if (!$participant->id_jv) {
@@ -87,8 +81,7 @@ foreach ($participants as $participant) {
                 break;
         }
     }
-    else{
-        
+    else{     
         switch ($num) {
             case 1:
                 $y =120;
@@ -100,8 +93,7 @@ foreach ($participants as $participant) {
             default:
                 $y+=120;
                 break;
-        }
-        
+        }       
         $x = $x2;
     }
 
