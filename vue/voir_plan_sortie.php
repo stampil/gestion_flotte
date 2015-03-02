@@ -8,6 +8,7 @@ $id_sortie = $_GET['sortie'];
 $sortieM = new SortieManager();
 $sortie = new Sortie($sortieM->get_sortie($id_sortie));
 
+
 if ($sortie->get_id_organisateur() == $USER->get_id()) {
     $organisateur = true;
 } else {
@@ -56,7 +57,7 @@ foreach ($participants as $participant) {
     }
     $joueur = new Joueur($joueurM->get_joueur($participant->id_joueur));
     $vaisseau = new Vaisseau($vaisseauM->get_vaisseau($participant->id_vaisseau));
-
+    $plan_formation = $sortieM->get_formation($participant->id_joueur, $id_sortie);
     if((int) $vaisseau->get_categorie()==0){
         switch ($num) {
             case 2:
@@ -101,7 +102,18 @@ foreach ($participants as $participant) {
         $couleur++;
         $num = 1;
     }
-    $symboles .= 'new Symbole({x: ' . $x . ', y: ' . $y . '}, ' . (int) $vaisseau->get_categorie() . ', ' . $couleur . ', ' . $participant->role . ', ' . $num++ . ', "' . $vaisseau->get_nom() . '", "' . $joueur->get_handle() . '"),' . "\n";
+    
+    $force_vip = 0;
+    if($plan_formation){
+        $couleur = $plan_formation->couleur;
+        $num = $plan_formation->num;
+        $x=$plan_formation->x;
+        $y=$plan_formation->y;
+        $force_vip = $plan_formation->is_vip;
+    }
+    
+    
+    $symboles .= 'new Symbole({x: ' . $x . ', y: ' . $y . '}, ' . (int) $vaisseau->get_categorie() . ', ' . $couleur . ', ' . $participant->role . ', ' . $num++ . ', "' . $vaisseau->get_nom() . '", "' . $joueur->get_handle() . '","'.$participant->id_joueur.'","'.$id_sortie.'",'.$force_vip.'),' . "\n";
 }
 $symboles = substr($symboles, 0, -2);
 $nb_present = count($present);
@@ -112,6 +124,7 @@ $nb_present = count($present);
 <p>m : mouvement ( m ensuite fixe le mouvement )
 <p>v : VIP ( v ensuite enleve le VIP )
 <p>1-4 : attribution des numéros ( 1 : Leader )
+<p>s : enregistré les modifications
 </div>
 <div class="content big">
     <center>

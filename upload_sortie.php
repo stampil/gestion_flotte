@@ -38,9 +38,8 @@ if (@$_GET["id_sortie"]) {
     $id_sortie = $sortieM->set_sortie($sortie);
     $joueurM = new JoueurManager($bdd);  
     $id_jv = $_GET["id_jv"];
-    $id_jv = $_GET["role"];
+    $role = $_GET["role"];
     $joueurM->set_sortie($id_sortie, $USER->get_id(), $id_jv, $role, 'Organisateur');
-
 }
 
 

@@ -56,4 +56,25 @@ class SortieManager {
         return $this->bdd->query($query,$id_sortie);
     }
     
+    public function get_organisateur($id_sortie){
+               $query="SELECT id_organisateur
+                FROM `".MyPDO::DB_FLAG."sortie` 
+                WHERE id_sortie=?"; 
+        $ret = $this->bdd->query($query,$id_sortie);
+        return @$ret[0]->id_organisateur;
+    }
+    
+    public function set_formation($id_joueur,$id_sortie,$x, $y,$num,$couleur,$is_vip){
+        $query ="INSERT INTO ".MyPDO::DB_FLAG."joueur_formation (id_joueur,id_sortie, x, y, num, couleur, is_vip) VALUE(?,?,?,?,?,?,?) ON DUPLICATE KEY UPDATE x=?, y=?, num=?, couleur=?, is_vip=?";
+        $this->bdd->query($query,$id_joueur,$id_sortie,$x,$y,$num,$couleur,$is_vip, $x,$y,$num,$couleur,$is_vip);
+        return $this->bdd->lastInsertId();
+    }
+    
+    public function get_formation($id_joueur,$id_sortie){
+        $query ="SELECT x,y,num,couleur,is_vip FROM ".MyPDO::DB_FLAG."joueur_formation
+                 WHERE  id_joueur=? AND id_sortie=?";
+        $ret = $this->bdd->query($query,$id_joueur,$id_sortie);
+        return @$ret[0];
+    }
+    
 }

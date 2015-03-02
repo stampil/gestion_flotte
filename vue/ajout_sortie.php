@@ -83,6 +83,18 @@ $vaisseau = $USER->get_vaisseau();
                 </select></td>
         </tr>
         <tr>
+            <td>Role</td>
+                    <td>
+               <select name="role">
+                   <?php
+                   for ($i=0; $i<count($roles); $i++){
+                       echo '<option value="'.$i.'">'.$roles[$i].'</option>';
+                   }
+                   ?>
+                  
+                </select></td>
+        </tr>
+        <tr>
             <td colspan="2"><input type="submit" /></td>
     </tr>
 </table>

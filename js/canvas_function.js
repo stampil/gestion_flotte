@@ -28,7 +28,6 @@ function affiche_heure(p) {
     // p la position où on l'affiche sur le canvas
     var d = new Date();
     ctx.fillText(d.getHours() + ':' + (d.getMinutes() < 10 ? '0' + d.getMinutes() : d.getMinutes()) + ':' + (d.getSeconds() < 10 ? '0' + d.getSeconds() : d.getSeconds()), p.x, p.y);
-
 }
 
 function give_me_a_color() {
@@ -54,7 +53,23 @@ function drawRotatedImage(image, p, angle) {
     ctx.restore();
 }
 
-function Symbole(pos, symbole, color, type, num, nomVaiss, nomJoueur) {
+function save_symbole(){
+    ko_save = false;
+    for (i in symboles) {
+            symboles[i].save();
+        }
+        setTimeout(function(){
+        if(!ko_save){
+            alert('formation enregistrée');
+        }
+        else{
+            alert('Vous devez etre l\'organisateur pour sauvegarder la formation, ou vous reconnectez si vous l\'etes.');
+       }
+        }
+    ,2000);
+}
+
+function Symbole(pos, symbole, color, type, num, nomVaiss, nomJoueur, id_joueur, id_sortie, force_vip) {
     this.color = '';
     this.indice_couleur = color;
     this.symbole = symbole; // type_symbole.leger ...
@@ -68,13 +83,39 @@ function Symbole(pos, symbole, color, type, num, nomVaiss, nomJoueur) {
     this.mouvement = false;
     this.clicked = false;
     this.clickedForced = false;
+    this.id_joueur = id_joueur;
+    this.id_sortie = id_sortie;
+    this.force_vip = force_vip;
 
     this.colorise = function () {
         this.color = couleurs[this.indice_couleur];
+        if(this.force_vip){
+            this.type= type_vaisseau.VIP;
+            this.force_vip = false; // permet de remodifier
+        }
     }
 
+    this.save = function(){
+        var vip = false;
+        if(this.type != this.typeOrigin && this.type==type_vaisseau.VIP){
+            vip=true;
+        }
+        $.post( "ajax/save_formation.php", {
+            "id_joueur":this.id_joueur,
+            "id_sortie":this.id_sortie,
+            "x":this.pos.x,
+            "y":this.pos.y,
+            "couleur":this.indice_couleur,
+            "num":this.num,
+            "is_vip":vip
+        }, function( data ) {
+          if(data){ko_save=true};
+        });
+        
+    }
     this.affiche = function () {
         this.colorise();
+        
         if(this.num == 1) this.num ='L';
         ctx.save();
         ctx.strokeStyle = '#202124';
