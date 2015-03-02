@@ -40,7 +40,10 @@ if(@$_POST["email"]){
     $joueur = $joueurM->identifie_joueur($email, $mdp);
     if($joueur){
         $USER=new Joueur($joueur);
-        $_SESSION["sjoueur"]= serialize($USER);     
+        $_SESSION["sjoueur"]= serialize($USER); 
+        if(isset($_POST["origine"])){
+            echo "<script>location.href='?".$_POST["origine"]."';</script>";
+        }
     }
     else{
         echo "<p>mdp invalide</p>";

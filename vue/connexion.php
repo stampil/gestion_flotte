@@ -16,13 +16,14 @@ if(is_connected()){
             </tr>
         </table>
     </form>
-</center> 
+</center>
 <?php
 }
 else{
 ?>
 <center>
     <form method="POST" action="?action=connexion">
+        <input type="hidden" name="origine" value="<?php echo @$_GET["origine"]; ?>" />
         <table class="tableform">
             <tr>
                 <td>Email :</td>
@@ -38,6 +39,7 @@ else{
         </table>
         <div id="mdp_oublie">Mot de passe oublié?</div>
     </form>
+    Pas encore inscrit sur ce site ? <a href="?action=ajout_joueur">inscrivez-vous !</a>
 </center> 
 <div id="dialog" title="récupération du mot de passe">
     <form method="post" action="mdp_oublie.php">

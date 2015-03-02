@@ -1,7 +1,7 @@
 <?php
 include_once 'template/menu.php';
 
-if (!is_connected()){     header("Location: ?action=connexion");     exit("veuillez vous (re)connectez"); }
+if (!is_connected()){     header("Location: ?action=connexion&origine=".  urlencode($_SERVER["QUERY_STRING"]));     exit("veuillez vous (re)connectez"); }
 
 $joueurM = new JoueurManager($bdd);
 $alliance_groupe = $joueurM->get_groupe_alliance($USER->get_id());

@@ -21,7 +21,7 @@ else if(!$uploadErr){
     if(!mail($email,
             "Perte du mot de passe RSI.fr",
             "Une demande de réinitialisation du mot de passe a été faite via votre email, pour enregistrer un nouveau mot de passe aller ici :<br />"
-            . " <a href='http://vps36292.ovh.net/mordu/robertsspaceindustriesfr/index.php?action=generate_mdp&email=$email&auth=". $crypt->crypte($email."toutestok".date("Ymd"))."'>http://vps36292.ovh.net/mordu/robertsspaceindustriesfr/index.php?action=generate_mdp&email=".$_POST["email"]."&auth=". $crypt->crypte($email."toutestok".date("Ymd"))."</a>",
+            . " <a href='http://vps36292.ovh.net/mordu/robertsspaceindustriesfr/index.php?action=generate_mdp&email=".$email."&auth=". $crypt->crypte($email."toutestok".date("Ymd"))."'>http://vps36292.ovh.net/mordu/robertsspaceindustriesfr/index.php?action=generate_mdp&email=".$email."&auth=". $crypt->crypte($email."toutestok".date("Ymd"))."</a>",
             $headers)){
        $uploadErr="L'envoie de mail rencontre des problemes, merci de m'avertir si le probleme persiste"; 
     }

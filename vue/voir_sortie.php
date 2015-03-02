@@ -1,5 +1,5 @@
 <?php
-if (!is_connected()){     header("Location: ?action=connexion");     exit("veuillez vous (re)connectez"); }
+if (!is_connected()){     header("Location: ?action=connexion&origine=".  urlencode($_SERVER["QUERY_STRING"]));     exit("veuillez vous (re)connectez"); }
 
 $id_sortie = $_GET['sortie'];
 $sortieM = new SortieManager();

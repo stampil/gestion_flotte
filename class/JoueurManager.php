@@ -37,6 +37,15 @@ class JoueurManager {
         return $ret[0];
     }
     
+    public function get_nb_sortie_joueur($handle){
+        $query="SELECT count(*) as nb_sortie
+                FROM `".MyPDO::DB_FLAG."joueur_sortie` js
+                JOIN ".MyPDO::DB_FLAG."joueur j ON js.id_joueur = j.id_joueur
+                WHERE j.handle = ? and id_jv>0";
+        $ret =  $this->bdd->query($query,$handle);
+        return $ret[0]->nb_sortie;
+    }
+    
     public function delete_joueur($id){
         $info_joueur = $this->get_joueur($id);
         

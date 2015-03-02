@@ -1,6 +1,6 @@
 <?php
 if (!is_connected()){
-    header("Location: ?action=connexion");
+    header("Location: ?action=connexion&origine=".  urlencode($_SERVER["QUERY_STRING"]));
     exit("veuillez vous (re)connectez");
 }
 
