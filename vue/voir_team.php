@@ -77,7 +77,7 @@ $joueur= $teamM->get_membre($teams[0]->id_team);
             $vaisseau_joueur = $joueurM->get_vaisseau($joueur[$i]->id_joueur);
             $team_joueur = $joueurM->get_all_team($joueur[$i]->id_joueur);
             $tr.= '<tr>'
-            . '<td valign="middle">' . $joueur[$i]->handle . '</td>'
+            . '<td valign="middle"><img src="http://vps36292.ovh.net/mordu/t/'.$team_joueur[0]->tag.'/'.$joueur[$i]->handle.'.png" /><br />' . $joueur[$i]->handle . '</td>'
                     . '<td>';
             
             foreach($team_joueur as $o){

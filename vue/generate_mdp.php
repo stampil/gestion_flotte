@@ -2,8 +2,8 @@
 <?php
 $test = $crypt->crypte($_GET["email"]."toutestok".date("Ymd"));
 
-if($test !=$_GET["auth"]){
-    exit("Ce lien n'est pas ou plus valide");
+if($test !=@$_GET["auth"]){
+    exit("Ce lien n'est pas ou plus valide, verifier que l'url soit complete, il faut le parametre auth=");
 }
 else{
 ?>
