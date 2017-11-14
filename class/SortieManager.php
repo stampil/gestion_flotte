@@ -11,11 +11,26 @@ class SortieManager {
             $this->bdd = new MyPDO();
         }
     }
+	
+	public function set_contrainte($id_sortie,$nb_ship,$type_ship,$nb_crew){
+		$query ="INSERT INTO ".MyPDO::DB_FLAG."sortie_condition (id_sortie,id_vaisseau, nb_vaisseau, nb_equipage) VALUE(?,?,?,?)";
+        $this->bdd->query($query,$id_sortie,$type_ship,$nb_ship,$nb_crew);
+    
+        return $this->bdd->lastInsertId();
+		
+	}
+	public function get_contrainte($id_sortie){
+        $query="SELECT c.*, v.nom
+                FROM ".MyPDO::DB_FLAG."sortie_condition c
+				LEFT JOIN ".MyPDO::DB_FLAG."vaisseau v ON c.id_vaisseau = v.id_vaisseau
+                WHERE c.id_sortie = ?"; 
+        return $this->bdd->query($query,$id_sortie);
+    }
     
     public function get_range_sortie($date_deb,$date_fin){
         $query="SELECT s.id_sortie, s.titre, s.detail, s.debut, s.fin, s.id_teamspeak, s.max_joueur, s.visibilite, ts.url as url_ts
                 FROM ".MyPDO::DB_FLAG."sortie s
-                JOIN ".MyPDO::DB_FLAG."teamspeak ts ON ts.id_teamspeak=s.id_teamspeak
+                LEFT JOIN ".MyPDO::DB_FLAG."teamspeak ts ON ts.id_teamspeak=s.id_teamspeak
                 WHERE debut between ? and ? order by debut"; 
         return $this->bdd->query($query,$date_deb,$date_fin);
     }
@@ -49,10 +64,10 @@ class SortieManager {
     }
     
     public function get_participant($id_sortie){
-        $query="SELECT js.id_joueur, js.id_jv, js.role, jpv.nom, v.categorie, js.commentaire, jpv.id_vaisseau  FROM `".MyPDO::DB_FLAG."joueur_sortie` js
+        $query="SELECT js.id_joueur, js.id_jv, js.role, js.creato, jpv.nom, v.categorie, js.commentaire, jpv.id_vaisseau  FROM `".MyPDO::DB_FLAG."joueur_sortie` js
         LEFT JOIN ".MyPDO::DB_FLAG."joueur_possede_vaisseau jpv ON jpv.id_jv = js.id_jv
         LEFT JOIN ".MyPDO::DB_FLAG."vaisseau v ON jpv.id_vaisseau = v.id_vaisseau
-        WHERE id_sortie=? order by v.categorie"; 
+        WHERE id_sortie=? order by js.creato"; 
         return $this->bdd->query($query,$id_sortie);
     }
     

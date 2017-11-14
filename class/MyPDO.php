@@ -12,11 +12,12 @@ class MyPDO extends PDO{
 	
 	public function __construct($options=null){
             
-            $DB_HOST= 'localhost';
-            $DB_PORT='3306';
-            $DB_NAME='starcitizen';
-            $DB_USER='root';
-            $DB_PASS='';
+            
+			$DB_HOST= 'localhost';
+			$DB_PORT='3306';
+			$DB_NAME='sc_planner';
+			$DB_USER='Detrios';
+			$DB_PASS='3666Eckume';
             
             $path = 'mysql:host='.$DB_HOST.';port='.$DB_PORT.';dbname='.$DB_NAME;
            

@@ -15,5 +15,12 @@ $(function() {
             return false;
         }
     });
+    
+    $('input[data-remplace]').each(function(){
+        var id_remplace =$(this).attr("data-remplace");
+        console.log('remplace',id_remplace);
+         $('input[data-id='+id_remplace+']').prop('checked',false).prop('disabled',true).prop('title','Une meilleur decoration remplace celle là');
+
+    });
 
   });

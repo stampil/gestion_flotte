@@ -1,5 +1,6 @@
 <?php
 class Vaisseau {
+	private $id;
     private $nom;
     private $img;
     private $categorie;
@@ -12,6 +13,7 @@ class Vaisseau {
     
     public function __construct($o=null) {
         if($o){
+			$this->set_id($o->id_vaisseau);
             $this->set_nom($o->nom);
             $this->set_img($o->img);
             $this->set_categorie($o->categorie);
@@ -31,6 +33,12 @@ class Vaisseau {
         $constructeurM = new ConstructeurManager();
         $constructeur = $constructeurM->get_constructeur($id_constructeur);
         $this->constructeur = new Constructeur($constructeur[0]);
+    }
+	public function get_id(){
+        return $this->id;
+    }
+    public function set_id($id){
+        $this->id = $id;
     }
     
     public function get_nom(){

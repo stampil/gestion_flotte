@@ -107,6 +107,8 @@ function Symbole(pos, symbole, color, type, num, nomVaiss, nomJoueur, id_joueur,
             "y":this.pos.y,
             "couleur":this.indice_couleur,
             "num":this.num,
+            "type":this.type,
+            "typeOrigin":this.typeOrigin,
             "is_vip":vip
         }, function( data ) {
           if(data){ko_save=true};

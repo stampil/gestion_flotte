@@ -1,0 +1,32 @@
+  .ruban, .medaille,.badge306{
+		cursor:pointer;
+
+    filter:  brightness(0.7) saturate(34%);;
+	-webkit-filter:  brightness(0.7) saturate(34%);;
+-moz-filter:  brightness(0.7) saturate(34%);;
+-o-filter:  brightness(0.7) saturate(34%);;
+-ms-filter:  brightness(0.7) saturate(34%);;
+
+
+	}
+	.medaille{
+		margin-left:-15px;
+		    margin-top: -30px;
+	}
+	.badge306{
+		position: absolute;
+    top: 216px;
+    left: 142px;
+    max-width: 120px;
+	max-height:60px;
+	cursor:default;
+	opacity:0.9
+	}
+	
+	.content_deco{
+		display:none;
+	}
+	.title_deco{
+		text-decoration:underline;
+		cursor:pointer;
+	}

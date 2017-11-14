@@ -10,6 +10,9 @@ $teamspeak = $teamspeakM->get_all_teamspeak();
 
 $vaisseau = $USER->get_vaisseau();
 
+
+$type_vaisseauM = new VaisseauManager($bdd);
+$type_vaisseau = $type_vaisseauM->get_all_vaisseau();
 ?>
 <p>Ajouter une sortie</p>
 
@@ -30,9 +33,9 @@ $vaisseau = $USER->get_vaisseau();
     <tr>
         <td>Teamspeak</td>
         <td><select name="id_teamspeak">
+                
             <?php
-            
-             foreach ($teamspeak as $o) {
+foreach ($teamspeak as $o) {
 
                  echo '<option value="'.$o->id_teamspeak.'">'.$o->label.'</option>';
              }
@@ -69,8 +72,19 @@ $vaisseau = $USER->get_vaisseau();
     </tr>
     <tr>
         <td title="(0: aucune limite)">Max joueur </td>
-        <td title="(0: aucune limite)"><input name="max_joueur" min="2" max="100" type="number"  value="8" class="numberTiny" /></td>
+        <td title="(0: aucune limite)"><input name="max_joueur" min="0" max="100" type="number"  value="8" class="numberTiny" /></td>
     </tr>
+    <tr>
+        <td valign="top">Contraintes <a href="javascript:add_contrainte()">Ajout</a></td>
+        <td >
+		<div id="contrainte"></diV>
+		</td>
+    </tr>
+    <tr>
+        <td colspan="2">Votre participation :</td>
+        <td >
+
+    </tr>	
     <tr>
             <td>Votre vaisseau :</td>
         <td><select name="id_jv">
@@ -99,4 +113,28 @@ $vaisseau = $USER->get_vaisseau();
     </tr>
 </table>
 </form>
+
+<script>
+var nb_contrainte=0;
+
+function add_contrainte(){
+	$('#contrainte').append('<p><input type="number" style="width:40px;" name="contrainte_number_ship['+nb_contrainte+']" value="0" min="0"> <select class="select" name="contrainte_type_ship['+nb_contrainte+']"><?php
+	foreach($type_vaisseau as $v){
+		echo '<option value="'.$v->id_vaisseau.'">'.$v->nom.'</option>';
+	}
+	
+	?></select> dont <input type="number" style="width:40px;" name="contrainte_number_crew['+nb_contrainte+']" value="1" min="1"> equipage (pilote(s) inclus)</p>');
+	nb_contrainte++;
+	    $(".select").multiselect({
+        multiple: false,
+        selectedList: 2
+    }).multiselectfilter({
+        label:"Filre :",
+        placeholder:"Entrer un texte"
+    }); 
+}
+$(document).ready(function(){
+	add_contrainte();
+});
+</script>
 

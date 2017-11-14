@@ -24,6 +24,9 @@ $vaisseauU = $USER->get_vaisseau();
 $team = $teamM->get_all_team();
 $teamU = $joueurM->get_all_team($USER->get_id());//TODO passer par la classe joueur comme $USER->get_vaisseau();
 
+$medailles = $joueurM->get_medaille($USER->get_id());
+$rubans = $joueurM->get_ruban($USER->get_id());
+$insignes = $joueurM->get_insigne($USER->get_id());
 ?>
 <center>
     <form method="POST" action="upload_modif_joueur.php" enctype="multipart/form-data">
@@ -146,26 +149,197 @@ $teamU = $joueurM->get_all_team($USER->get_id());//TODO passer par la classe jou
                     <div>    
                 </td>
             </tr>
-            <tr>
-                <td>Teams secondaires:</td>
+			<tr>
+                <td>Rubans acquis en Alpha:</td>
                 <td>
-                   <select id="select_teamS_joueur" name="select_teamS_joueur[]" multiple="multiple" class="multiselect">
+                   
                         <?php
-                        for ($i = 0; $i < count($team); $i++) {
-                            $selected="";
-                            foreach($teamU as $o){
-                                if($o->id_team == $team[$i]->id_team && !$o->principal){
-                                    $selected="selected";
-                                    break;
-                                }
+                       
+                            
+                            foreach($rubans as $o){
+								if($o->groupe !=0) continue;
+                                ?>
+								<input type="checkbox"
+                                       data-id="ruban_<?= $o->groupe; ?>_<?= $o->id; ?>"
+                                       data-remplace="ruban_<?= $o->groupe; ?>_<?= $o->remplace; ?>"
+                                       name="rubans[<?= $o->groupe; ?>][<?= $o->id; ?>]" id="<?= $o->id; ?>"
+ <?php echo ($o->affiche?'checked=checked':''); ?> title="afficher sur costume/banniere"  /><label for="<?= $o->id; ?>"><img src="upload/ruban/<?php echo $o->img; ?>" title="<?php echo $o->nom.' '.str_replace('"','',$o->description); ?>" width="50" /></label> &nbsp;
+								<?php
                             }
-                            echo '<option value="'.$team[$i]->id_team.'" '.$selected.'>' . $team[$i]->nom . '</option>';
-                        }
-                        ?>
-                   </select>
-                    <div>    
+
+                        ?>  
                 </td>
             </tr>
+			<tr>
+                <td>Rubans acquis en Beta:</td>
+                <td>
+                   
+                        <?php
+                       
+                            
+                            foreach($rubans as $o){
+								if($o->groupe !=1) continue;
+                                ?>
+								<input type="checkbox"
+                                       data-id="ruban_<?= $o->groupe; ?>_<?= $o->id; ?>"
+                                       data-remplace="ruban_<?= $o->groupe; ?>_<?= $o->remplace; ?>"
+                                       name="rubans[<?= $o->groupe; ?>][<?= $o->id; ?>]" id="<?= $o->id; ?>"
+ <?php echo ($o->affiche?'checked=checked':''); ?> title="afficher sur costume/banniere"  /><label for="<?= $o->id; ?>"><img src="upload/ruban/<?php echo $o->img; ?>" title="<?php echo $o->nom.' '.str_replace('"','',$o->description); ?>" width="50" /></label> &nbsp;
+								<?php
+                            }
+
+                        ?>  
+                </td>
+            </tr>
+			<tr>
+                <td>Rubans acquis à la release:</td>
+                <td>
+                   
+                        <?php
+                       
+                            
+                            foreach($rubans as $o){
+								if($o->groupe !=2) continue;
+                                ?>
+								<input type="checkbox"
+                                       data-id="ruban_<?= $o->groupe; ?>_<?= $o->id; ?>"
+                                       data-remplace="ruban_<?= $o->groupe; ?>_<?= $o->remplace; ?>"
+                                       name="rubans[<?= $o->groupe; ?>][<?= $o->id; ?>]" id="<?= $o->id; ?>"
+ <?php echo ($o->affiche?'checked=checked':''); ?> title="afficher sur costume/banniere"  /><label for="<?= $o->id; ?>"><img src="upload/ruban/<?php echo $o->img; ?>" title="<?php echo $o->nom.' '.str_replace('"','',$o->description); ?>" width="50" /></label> &nbsp;
+								<?php
+                            }
+
+                        ?>  
+                </td>
+            </tr>
+            <tr>
+                <td>Medailles acquises en alpha :</td>
+                <td>
+                   
+                        <?php
+                       
+                            
+                            foreach($medailles as $o){
+								if($o->groupe !=0) continue;
+                                ?>
+								<input type="checkbox"
+                                       data-id="medaille_<?= $o->groupe; ?>_<?= $o->id; ?>"
+                                       data-remplace="medaille_<?= $o->groupe; ?>_<?= $o->remplace; ?>"
+                                       name="medailles[<?= $o->groupe; ?>][<?php echo $o->id; ?>]" id="<?= $o->id; ?>"
+  <?php echo ($o->affiche?'checked=checked':''); ?> title="afficher sur costume/banniere" /><label for="<?= $o->id; ?>"><img src="upload/medaille/<?php echo $o->img; ?>" title="<?php echo $o->nom.' '.str_replace('"','',$o->description); ?>" width="50" /></label> &nbsp; 
+								<?php
+                            }
+
+                        ?>  
+                </td>
+            </tr>
+			<tr>
+                <td>Medailles acquises en beta :</td>
+                <td>
+                   
+                        <?php
+                       
+                            
+                            foreach($medailles as $o){
+								if($o->groupe !=1) continue;
+                                ?>
+								<input type="checkbox"
+                                       data-id="medaille_<?= $o->groupe; ?>_<?= $o->id; ?>"
+                                       data-remplace="medaille_<?= $o->groupe; ?>_<?= $o->remplace; ?>"
+                                       name="medailles[<?= $o->groupe; ?>][<?php echo $o->id; ?>]"
+                                       id="<?= $o->id; ?>"  <?php echo ($o->affiche?'checked=checked':''); ?> title="afficher sur costume/banniere" /><label for="<?= $o->id; ?>"><img src="upload/medaille/<?php echo $o->img; ?>" title="<?php echo $o->nom.' '.str_replace('"','',$o->description); ?>" width="50" /></label> &nbsp; 
+								<?php
+                            }
+
+                        ?>  
+                </td>
+            </tr>
+			<tr>
+                <td>Medailles acquises à la release :</td>
+                <td>
+                   
+                        <?php
+                       
+                            
+                            foreach($medailles as $o){
+								if($o->groupe !=2) continue;
+                                ?>
+								<input type="checkbox"
+                                       data-id="medaille_<?= $o->groupe; ?>_<?= $o->id; ?>"
+                                       data-remplace="medaille_<?= $o->groupe; ?>_<?= $o->remplace; ?>"
+                                       name="medailles[<?= $o->groupe; ?>][<?php echo $o->id; ?>]"
+                                       id="<?= $o->id; ?>"  <?php echo ($o->affiche?'checked=checked':''); ?> title="afficher sur costume/banniere" /><label for="<?= $o->id; ?>"><img src="upload/medaille/<?php echo $o->img; ?>" title="<?php echo $o->nom.' '.str_replace('"','',$o->description); ?>" width="50" /></label> &nbsp; 
+								<?php
+                            }
+
+                        ?>  
+                </td>
+            </tr>
+			
+			<tr>
+                <td>Insignes acquis en Alpha:</td>
+                <td>
+                   
+                        <?php
+                       
+                            
+                            foreach($insignes as $o){
+								if($o->groupe !=0) continue;
+                                ?>
+								<input type="checkbox"
+                                       data-id="insigne_<?= $o->groupe; ?>_<?= $o->id; ?>"
+                                       data-remplace="insigne_<?= $o->groupe; ?>_<?= $o->remplace; ?>"
+                                       name="insignes[<?= $o->groupe; ?>][<?= $o->id; ?>]"
+                                       id="<?= $o->id; ?>" <?php echo ($o->affiche?'checked=checked':''); ?> title="afficher sur costume/banniere"  /><label for="<?= $o->id; ?>"><img src="upload/insigne/<?php echo $o->img; ?>" title="<?php echo $o->nom.' '.str_replace('"','',$o->description); ?>" width="50" /></label> &nbsp;
+								<?php
+                            }
+
+                        ?>  
+                </td>
+            </tr>
+			<tr>
+                <td>Insignes acquis en Beta:</td>
+                <td>
+                   
+                        <?php
+                       
+                            
+                            foreach($insignes as $o){
+								if($o->groupe !=1) continue;
+                                ?>
+								<input type="checkbox"
+                                       data-id="insigne_<?= $o->groupe; ?>_<?= $o->id; ?>"
+                                       data-remplace="insigne_<?= $o->groupe; ?>_<?= $o->remplace; ?>"
+                                       name="insignes[<?= $o->groupe; ?>][<?= $o->id; ?>]"
+                                       id="<?= $o->id; ?>" <?php echo ($o->affiche?'checked=checked':''); ?> title="afficher sur costume/banniere"  /><label for="<?= $o->id; ?>"><img src="upload/insigne/<?php echo $o->img; ?>" title="<?php echo $o->nom.' '.str_replace('"','',$o->description); ?>" width="50" /></label> &nbsp;
+								<?php
+                            }
+
+                        ?>  
+                </td>
+            </tr>
+			<tr>
+                <td>Insignes acquis à la release:</td>
+                <td>
+                   
+                        <?php
+                       
+                            
+                            foreach($insignes as $o){
+								if($o->groupe !=2) continue;
+                                ?>
+								<input type="checkbox"
+                                       data-id="insigne_<?= $o->groupe; ?>_<?= $o->id; ?>"
+                                       data-remplace="insigne_<?= $o->groupe; ?>_<?= $o->remplace; ?>"
+                                       name="insignes[<?= $o->groupe; ?>][<?= $o->id; ?>]"
+                                       id="<?= $o->id; ?>" <?php echo ($o->affiche?'checked=checked':''); ?> title="afficher sur costume/banniere"  /><label for="<?= $o->id; ?>"><img src="upload/insigne/<?php echo $o->img; ?>" title="<?php echo $o->nom.' '.str_replace('"','',$o->description); ?>" width="50" /></label> &nbsp;
+								<?php
+                            }
+
+                        ?>  
+                </td>
+            </tr>
+			
             <tr>
                 <td colspan="2" align="center"><input type="submit" value="modifier"></td>      
             </tr>

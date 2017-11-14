@@ -36,10 +36,17 @@ if (@$_GET["id_sortie"]) {
     $sortieM->update_sortie($sortie);
 } else {
     $id_sortie = $sortieM->set_sortie($sortie);
+	$nb_contrainte = count(@$_GET['contrainte_number_ship']);
+	for($i=0;$i<$nb_contrainte; $i++){
+		if(!$_GET['contrainte_number_ship'][$i]) continue;
+		$sortieM->set_contrainte($id_sortie,$_GET['contrainte_number_ship'][$i],$_GET['contrainte_type_ship'][$i],$_GET['contrainte_number_crew'][$i]);
+	}
+	
+	
     $joueurM = new JoueurManager($bdd);  
     $id_jv = $_GET["id_jv"];
     $role = $_GET["role"];
-    $joueurM->set_sortie($id_sortie, $USER->get_id(), $id_jv, $role, 'Organisateur');
+    $joueurM->set_sortie($id_sortie, $USER->get_id(), $id_jv, $role, '');
 }
 
 

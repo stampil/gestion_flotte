@@ -4,7 +4,6 @@ require 'require/commun.php';
 
 $action = isset($_GET["action"]) ? $_GET["action"] : "accueil";
 ?>
-<!DOCTYPE html>
 <html>
 <head>
 

@@ -22,5 +22,5 @@ foreach ($team as $o) {
 }
 $html = substr($html, 0,-6)."<br /><br />";
 
-echo $html;
+//echo $html;
 ?>

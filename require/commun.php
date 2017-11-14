@@ -15,7 +15,22 @@ define("ROLE_MEDICAL",1);
 define("ROLE_VIP",2);
 define("ROLE_COMBAT",3);
 define("ROLE_MARCHAND",4);
-$roles = array("Divers","Medical","VIP","Combat","Marchand");
+define("ROLE_UNIQUE",1);
+define("ROLE_NON_UNIQUE",0);
+$roles = array(
+"[Chasse] Pilote de chasseur",
+"[Chasse] Chef d’escadrille",
+"[Equipage] Capitaine du vaisseau",
+"[Equipage] Pilote",
+"[Equipage] Co-pilote / Opérateur",
+"[Equipage] Artilleur",
+"[Equipage] N’importe quel rôle à bord",
+"[Logistique] Transporteur de troupe / Sauveteur de pilotes",
+"[FPS] Chef marines",
+"[FPS] Marines",
+"[Lead] Coordinateur d’évent"
+);
+
 
 $bdd = new MyPDO();
 $crypt = new Crypt();
@@ -98,6 +113,9 @@ function usdatetotime($usdate){
 }
 function usdatetotimeus($usdate){
     return preg_replace("/[0-9]{4}-[0-9]{2}-[0-9]{2} ([0-9]{2}):([0-9]{2}):[0-9]{2}/", "$1:$2", $usdate);
+}
+function usdatetodate($usdate){
+    return preg_replace("/([0-9]{4})-([0-9]{2})-([0-9]{2}) ([0-9]{2}):([0-9]{2}):[0-9]{2}/", "$3/$2/$1 $4h$5", $usdate);
 }
 
 ?>

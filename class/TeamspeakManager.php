@@ -19,6 +19,7 @@ class TeamspeakManager {
                 FROM ".MyPDO::DB_FLAG."teamspeak
                 WHERE id_teamspeak=?"; 
         $ret = $this->bdd->query($query,$id_teamspeak);
+        if(!isset($ret[0])) return 0;
         return $ret[0];
     }
     

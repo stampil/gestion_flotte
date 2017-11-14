@@ -65,6 +65,39 @@ if (!$uploadErr) {
 
     
     $joueurM->set_team($USER->get_id(), @$_POST["select_teamP_joueur"], @$_POST["select_teamS_joueur"]);
+	
+	$joueurM->reset_deco($USER->get_id());
+	
+	$medailles = @$_POST["medailles"];
+	if(is_array($medailles)){
+        foreach ($medailles as $id_groupe => $tab_medaille){
+            foreach ($tab_medaille as $id_medaille => $affiche){
+                if($affiche) $affiche =1;
+                $joueurM->affiche_medaille($USER->get_id(),$id_medaille,$id_groupe,$affiche);
+            }
+        }
+	}
+	
+	$rubans = @$_POST["rubans"];
+	if(is_array($rubans)){
+        foreach ($rubans as $id_groupe => $tab_ruban){
+            foreach ($tab_ruban as $id_ruban => $affiche){
+                if($affiche) $affiche =1;
+                $joueurM->affiche_ruban($USER->get_id(),$id_ruban,$id_groupe,$affiche);
+            }
+        }
+	}
+	
+	$insignes = @$_POST["insignes"];
+	if(is_array($insignes)){
+        foreach ($insignes as $id_groupe => $tab_insigne){
+            foreach ($tab_insigne as $id_insigne => $affiche){
+                if($affiche) $affiche =1;
+                $joueurM->affiche_insigne($USER->get_id(),$id_insigne,$id_groupe,$affiche);
+            }
+        }
+	}
+
 
     
     $_SESSION["sjoueur"]=  serialize($joueur);
